@@ -102,7 +102,7 @@ class Board extends React.Component {
             />);
     }
 
-    render() {        
+    render() {      
         return (
         <div>
             <div className="board-row">
@@ -156,7 +156,7 @@ class Game extends React.Component {
             xIsNext: true,
             stepRow: Array(25).fill(null),  // step 별 row index
             stepCol: Array(25).fill(null),  // step 별 col index
-            selectButton: Array(25).fill(false),
+            selectButton: 0,
         }
     }
 
@@ -186,12 +186,10 @@ class Game extends React.Component {
     }
 
     jumpTo(step) {
-        const selectButton = this.state.selectButton.slice();
-        selectButton[step] = true;
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0,
-            selectButton: selectButton,
+            selectButton: step,
         })
     }
 
@@ -200,6 +198,7 @@ class Game extends React.Component {
         const current = history[this.state.stepNumber];
         const stepRow = this.state.stepRow.slice();
         const stepCol = this.state.stepCol.slice();
+        const selectButton = this.state.selectButton;
         const winner = calculatreWinner(current.squares);
 
         const moves = history.map((step, move) => {
@@ -208,19 +207,37 @@ class Game extends React.Component {
             console.log('stepRow : ', stepRow);
             console.log('stepCol : ', stepCol);
             const desc = move ? 'Go to move #' + move + '(row, col) : (' + stepRow[move-1] + ', ' + stepCol[move-1] + ')'  : 'Go to Game start';
-            if (move % 2 == 0) {
-                return (
-                    <li key={move}>
-                    <button className="btn btn-primary" onClick={() => this.jumpTo(move)}>{desc}</button>
-                </li>
-                )
+            
+            if (move === selectButton && move !== 0) {
+                if (move % 2 === 0) {
+                    return (
+                        <li key={move}>
+                            <button className="btn btn-primary" onClick={() => this.jumpTo(move)}>{desc}</button>
+                        </li>
+                    )
+                } else {
+                    return (
+                        <li key={move}>
+                            <button className="btn btn-success" onClick={() => this.jumpTo(move)}>{desc}</button>
+                        </li>
+                    )
+                }
             } else {
-                return (
-                    <li key={move}>
-                    <button className="btn btn-secondary" onClick={() => this.jumpTo(move)}>{desc}</button>
-                </li>
-                )
+                if (move % 2 === 0) {
+                    return (
+                        <li key={move}>
+                            <button className="btn btn-outline-primary" onClick={() => this.jumpTo(move)}>{desc}</button>
+                        </li>
+                    )
+                } else {
+                    return (
+                        <li key={move}>
+                            <button className="btn btn-outline-success" onClick={() => this.jumpTo(move)}>{desc}</button>
+                        </li>
+                    )
+                }
             }
+
         })
 
         let status;
