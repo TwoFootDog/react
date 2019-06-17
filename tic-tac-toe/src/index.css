@@ -15,6 +15,12 @@ ol, ul {
 
 .status {
   margin-bottom: 10px;
+  padding: 10px;
+}
+
+.button {
+  margin-right: -1px;
+  margin-top: -1px;
 }
 
 .square {
