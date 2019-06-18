@@ -102,45 +102,61 @@ class Board extends React.Component {
             />);
     }
 
-    render() {      
+    render() {
+        let allSquares = [];      
+        let rowSquares = [];
+        let createSquare = () => {
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 5; j++) {
+                    rowSquares.push(this.renderSquare(i*5 + j));
+                }
+                allSquares.push(<div className="board-row">{rowSquares}</div>)
+                rowSquares = [];
+            }
+        } 
+        createSquare();
+
         return (
-        <div>
-            <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
+            <div>
+                {allSquares.map(Square => Square)}
             </div>
-            <div className="board-row">
-            {this.renderSquare(5)}
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-            {this.renderSquare(9)}
-            </div>
-            <div className="board-row">
-            {this.renderSquare(10)}
-            {this.renderSquare(11)}
-            {this.renderSquare(12)}
-            {this.renderSquare(13)}
-            {this.renderSquare(14)}
-            </div>
-            <div className="board-row">
-            {this.renderSquare(15)}
-            {this.renderSquare(16)}
-            {this.renderSquare(17)}
-            {this.renderSquare(18)}
-            {this.renderSquare(19)}
-            </div>
-            <div className="board-row">
-            {this.renderSquare(20)}
-            {this.renderSquare(21)}
-            {this.renderSquare(22)}
-            {this.renderSquare(23)}
-            {this.renderSquare(24)}
-            </div>
-        </div>
+        // <div>
+        //     <div className="board-row">
+        //     {this.renderSquare(0)}
+        //     {this.renderSquare(1)}
+        //     {this.renderSquare(2)}
+        //     {this.renderSquare(3)}
+        //     {this.renderSquare(4)}
+        //     </div>
+        //     <div className="board-row">
+        //     {this.renderSquare(5)}
+        //     {this.renderSquare(6)}
+        //     {this.renderSquare(7)}
+        //     {this.renderSquare(8)}
+        //     {this.renderSquare(9)}
+        //     </div>
+        //     <div className="board-row">
+        //     {this.renderSquare(10)}
+        //     {this.renderSquare(11)}
+        //     {this.renderSquare(12)}
+        //     {this.renderSquare(13)}
+        //     {this.renderSquare(14)}
+        //     </div>
+        //     <div className="board-row">
+        //     {this.renderSquare(15)}
+        //     {this.renderSquare(16)}
+        //     {this.renderSquare(17)}
+        //     {this.renderSquare(18)}
+        //     {this.renderSquare(19)}
+        //     </div>
+        //     <div className="board-row">
+        //     {this.renderSquare(20)}
+        //     {this.renderSquare(21)}
+        //     {this.renderSquare(22)}
+        //     {this.renderSquare(23)}
+        //     {this.renderSquare(24)}
+        //     </div>
+        // </div>
         );
     }
 }
@@ -208,7 +224,7 @@ class Game extends React.Component {
             console.log('stepCol : ', stepCol);
             const desc = move ? 'Go to move #' + move + '(row, col) : (' + stepRow[move-1] + ', ' + stepCol[move-1] + ')'  : 'Go to Game start';
             
-            if (move === selectButton && move !== 0) {
+            if (move === selectButton) {
                 if (move % 2 === 0) {
                     return (
                         <li key={move}>
