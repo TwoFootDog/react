@@ -43,9 +43,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 //     return null;
 // }
 
-function calculatreWinner(squares) {
+function calculateWinner(squares) {
     const widthIndex = 1;
     const heightIndex = 5;
+    let winnerSqures = {
+        squares: null,
+        winnerIndex: [],
+    };
 
     for (let i = 0; i < 5; i++) {
         // 세로 일치 확인
@@ -54,7 +58,14 @@ function calculatreWinner(squares) {
             squares[i] === squares[i + heightIndex*2] && 
             squares[i] === squares[i + heightIndex*3] && 
             squares[i] === squares[i + heightIndex*4]) {
-            return squares[i];
+            winnerSqures.squares = squares[i];
+            winnerSqures.winnerIndex.push(i);
+            winnerSqures.winnerIndex.push(i + heightIndex);
+            winnerSqures.winnerIndex.push(i + heightIndex*2);
+            winnerSqures.winnerIndex.push(i + heightIndex*3);
+            winnerSqures.winnerIndex.push(i + heightIndex*4);
+            return winnerSqures;
+            // return squares[i];
         }
         // 가로 일치 확인
         if (squares[i * heightIndex] && 
@@ -62,7 +73,14 @@ function calculatreWinner(squares) {
             squares[i * heightIndex] === squares[i * heightIndex + 2] && 
             squares[i * heightIndex] === squares[i * heightIndex + 3] && 
             squares[i * heightIndex] === squares[i * heightIndex + 4]) {
-            return squares[i * heightIndex];
+            winnerSqures.squares = squares[i * heightIndex];
+            winnerSqures.winnerIndex.push(i * heightIndex);
+            winnerSqures.winnerIndex.push(i * heightIndex + 1);
+            winnerSqures.winnerIndex.push(i * heightIndex + 2);
+            winnerSqures.winnerIndex.push(i * heightIndex + 3);
+            winnerSqures.winnerIndex.push(i * heightIndex + 4);
+            return winnerSqures;
+            // return squares[i * heightIndex];
         }
     }
     // 대각선 일치 확인
@@ -71,24 +89,47 @@ function calculatreWinner(squares) {
         squares[0] === squares[0 + (heightIndex + widthIndex)*2 ] &&
         squares[0] === squares[0 + (heightIndex + widthIndex)*3 ] &&
         squares[0] === squares[0 + (heightIndex + widthIndex)*4 ]) {
-        return squares[0];
+        winnerSqures.squares = squares[0];
+        winnerSqures.winnerIndex.push(0);
+        winnerSqures.winnerIndex.push(0 + (heightIndex + widthIndex)*1 );
+        winnerSqures.winnerIndex.push(0 + (heightIndex + widthIndex)*2 );
+        winnerSqures.winnerIndex.push(0 + (heightIndex + widthIndex)*3 );
+        winnerSqures.winnerIndex.push(0 + (heightIndex + widthIndex)*4 );
+        return winnerSqures;
+        // return squares[0];
     }
     if (squares[4] && 
         squares[4] === squares[4 + (heightIndex - widthIndex)*1 ] &&
         squares[4] === squares[4 + (heightIndex - widthIndex)*2 ] &&
         squares[4] === squares[4 + (heightIndex - widthIndex)*3 ] &&
         squares[4] === squares[4 + (heightIndex - widthIndex)*4 ]) {
-        return squares[4];
+        winnerSqures.squares = squares[4];
+        winnerSqures.winnerIndex.push(4);
+        winnerSqures.winnerIndex.push(4 + (heightIndex - widthIndex)*1 );
+        winnerSqures.winnerIndex.push(4 + (heightIndex - widthIndex)*2 );
+        winnerSqures.winnerIndex.push(4 + (heightIndex - widthIndex)*3 );
+        winnerSqures.winnerIndex.push(4 + (heightIndex - widthIndex)*4 );
+        return winnerSqures;
+        // return squares[4];
     }
-    return null;
+    return winnerSqures;
 }
 
 function Square(props) {
-    return (
-        <button className="square" onClick = {props.onClick}>
-            {props.value}
-        </button>
-        );
+    if (props.index === props.winnerIndex) {
+        return (
+            <button className="btn btn-primary" onClick = {props.onClick}>
+                aaaaa
+            </button>
+            );
+    } else {
+        return (
+            <button className="square" onClick = {props.onClick}>
+                {props.value}
+            </button>
+            );
+    }
+
 }
 
 class Board extends React.Component {
@@ -98,6 +139,8 @@ class Board extends React.Component {
         return (
             <Square 
                 value={this.props.squares[i]} 
+                index={i}
+                winnderIndex={this.props.widthIndex}
                 onClick={() => this.props.onClick(i)}
             />);
     }
@@ -108,9 +151,9 @@ class Board extends React.Component {
         let createSquare = () => {
             for (let i = 0; i < 5; i++) {
                 for (let j = 0; j < 5; j++) {
-                    rowSquares.push(this.renderSquare(i*5 + j));
+                    rowSquares.push(<span key={i*5 + j}>{this.renderSquare(i*5 + j)}</span>);
                 }
-                allSquares.push(<div className="board-row">{rowSquares}</div>)
+                allSquares.push(<div className="board-row" key={i}>{rowSquares}</div>)
                 rowSquares = [];
             }
         } 
@@ -134,8 +177,7 @@ class Board extends React.Component {
         //     {this.renderSquare(7)}
         //     {this.renderSquare(8)}
         //     {this.renderSquare(9)}
-        //     </div>
-        //     <div className="board-row">
+        //     </div>ild
         //     {this.renderSquare(10)}
         //     {this.renderSquare(11)}
         //     {this.renderSquare(12)}
@@ -173,6 +215,7 @@ class Game extends React.Component {
             stepRow: Array(25).fill(null),  // step 별 row index
             stepCol: Array(25).fill(null),  // step 별 col index
             selectButton: 0,
+            isAsc: true,
         }
     }
 
@@ -183,7 +226,7 @@ class Game extends React.Component {
         const stepRow = this.state.stepRow.slice();
         const stepCol = this.state.stepCol.slice();
 
-        if (calculatreWinner(squares) || squares[i]) {
+        if (calculateWinner(squares).squares || squares[i]) {
             return;
         }
         squares[i] = this.state.xIsNext? 'X' : 'O';
@@ -209,56 +252,88 @@ class Game extends React.Component {
         })
     }
 
+    isAscClick(isAsc) {
+        this.setState({
+            isAsc: isAsc,
+        })
+    }
+
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const stepRow = this.state.stepRow.slice();
         const stepCol = this.state.stepCol.slice();
         const selectButton = this.state.selectButton;
-        const winner = calculatreWinner(current.squares);
+        const winner = calculateWinner(current.squares).squares;
+        const winnerIndex = calculateWinner(current.squares).winnerIndex;
+        
 
         const moves = history.map((step, move) => {
             console.log('step : ', step);
             console.log('move : ', move);
             console.log('stepRow : ', stepRow);
             console.log('stepCol : ', stepCol);
-            const desc = move ? 'Go to move #' + move + '(row, col) : (' + stepRow[move-1] + ', ' + stepCol[move-1] + ')'  : 'Go to Game start';
+            console.log('this.state.history.length: ', this.state.history.length-1);
             
-            if (move === selectButton) {
-                if (move % 2 === 0) {
-                    return (
-                        <li key={move}>
-                            <button className="btn btn-primary" onClick={() => this.jumpTo(move)}>{desc}</button>
-                        </li>
-                    )
-                } else {
-                    return (
-                        <li key={move}>
-                            <button className="btn btn-success" onClick={() => this.jumpTo(move)}>{desc}</button>
-                        </li>
-                    )
-                }
+            // const desc = move ? 'Go to move #' + move + '(row, col) : (' + stepRow[move-1] + ', ' + stepCol[move-1] + ')'  : 'Go to Game start';
+            
+            if (move === 0) {
+                return (
+                    <li key={move}>
+                        <button className="btn btn-primary" onClick={() => this.jumpTo(move)}>Go to Game start</button>
+                    </li>
+                ) 
             } else {
-                if (move % 2 === 0) {
-                    return (
-                        <li key={move}>
-                            <button className="btn btn-outline-primary" onClick={() => this.jumpTo(move)}>{desc}</button>
-                        </li>
-                    )
+                if(!this.state.isAsc) {
+                    move = (this.state.history.length) - move;
+                } 
+                const desc = 'Go to move #' + move + '(row, col) : (' + stepRow[move-1] + ', ' + stepCol[move-1] + ')';
+                if (move === selectButton) {
+                    if (move % 2 === 0) {
+                        return (
+                            <li key={move}>
+                                <button className="btn btn-primary" onClick={() => this.jumpTo(move)}>{desc}</button>
+                            </li>
+                        )
+                    } else {
+                        return (
+                            <li key={move}>
+                                <button className="btn btn-success" onClick={() => this.jumpTo(move)}>{desc}</button>
+                            </li>
+                        )
+                    }
                 } else {
-                    return (
-                        <li key={move}>
-                            <button className="btn btn-outline-success" onClick={() => this.jumpTo(move)}>{desc}</button>
-                        </li>
-                    )
+                    if (move % 2 === 0) {
+                        return (
+                            <li key={move}>
+                                <button className="btn btn-outline-primary" onClick={() => this.jumpTo(move)}>{desc}</button>
+                            </li>
+                        )
+                    } else {
+                        return (
+                            <li key={move}>
+                                <button className="btn btn-outline-success" onClick={() => this.jumpTo(move)}>{desc}</button>
+                            </li>
+                        )
+                    }
                 }
             }
-
         })
+
+    const ascDescButton = () => {
+            let button = [];
+            button.push(<button className="btn btn-danger" key='asc' onClick={() => this.isAscClick(true)}>ASC</button>)
+            button.push(<button className="btn btn-warning" key='desc' onClick={() => this.isAscClick(false)}>DESC</button>)
+            return (
+                <div>{button}</div>
+            )
+        }
+
 
         let status;
         if (winner) {
             status = 'Winner:' + winner;
+            console.log("winnderIndex : " + winnerIndex);
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
@@ -266,14 +341,16 @@ class Game extends React.Component {
         <div className="game">
             <div className="game-board">
             <div>{status}</div>
-            <Board squares = {current.squares}
+            <Board squares = {current.squares} winnderIndex = {winnerIndex}
             onClick={(i) => {
                 console.log("i : " + i)
                 this.handClick(i)}} />
             </div>
             <div className="game-info">
             <ol>{moves}</ol>
+            <ol>{ascDescButton()}</ol>
             </div>
+            
         </div>
         );
     }
