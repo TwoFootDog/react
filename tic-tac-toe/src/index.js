@@ -116,10 +116,10 @@ function calculateWinner(squares) {
 }
 
 function Square(props) {
-    if (props.index === props.winnerIndex) {
+    if (props.winnerIndex.indexOf(props.index) !== -1) {
         return (
-            <button className="btn btn-primary" onClick = {props.onClick}>
-                aaaaa
+            <button className="winnerSquare" onClick = {props.onClick}>
+                {props.value}
             </button>
             );
     } else {
@@ -129,7 +129,6 @@ function Square(props) {
             </button>
             );
     }
-
 }
 
 class Board extends React.Component {
@@ -140,7 +139,7 @@ class Board extends React.Component {
             <Square 
                 value={this.props.squares[i]} 
                 index={i}
-                winnderIndex={this.props.widthIndex}
+                winnerIndex={this.props.winnerIndex}
                 onClick={() => this.props.onClick(i)}
             />);
     }
@@ -320,7 +319,7 @@ class Game extends React.Component {
             }
         })
 
-    const ascDescButton = () => {
+        const ascDescButton = () => {
             let button = [];
             button.push(<button className="btn btn-danger" key='asc' onClick={() => this.isAscClick(true)}>ASC</button>)
             button.push(<button className="btn btn-warning" key='desc' onClick={() => this.isAscClick(false)}>DESC</button>)
@@ -341,7 +340,7 @@ class Game extends React.Component {
         <div className="game">
             <div className="game-board">
             <div>{status}</div>
-            <Board squares = {current.squares} winnderIndex = {winnerIndex}
+            <Board squares = {current.squares} winnerIndex = {winnerIndex}
             onClick={(i) => {
                 console.log("i : " + i)
                 this.handClick(i)}} />
