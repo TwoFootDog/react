@@ -35,6 +35,7 @@ class ReactTableComponent extends React.Component {
         const columns = [{
             Header: '배치프로그램시스템ID',
             accessor: 'batchProgramId.systemId',
+            Cell: row => (<span>{row.value}</span>),
             foldable: true,
         }, {
             Header: '배치순번',
@@ -61,10 +62,10 @@ class ReactTableComponent extends React.Component {
         }
         const table = () => {
             return (
-                <FoldableSelectTreeTable 
+                <FoldableSelectTreeTable className="table" 
                     data={tableData} 
                     columns={columns} 
-                    defaultSorted={[{ id: 'batchProgramId.batchSeq', desc: false }]}/>
+                    defaultSorted={[{ id: 'batchProgramId.batchSeq', desc: false}]}/>
                 )
         }
         return (

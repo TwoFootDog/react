@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import ReactTableComponent from './Component/ReactTableComponent';
 import MaterialTableComponent from './Component/MaterialTableComponent';
+import BootStrapTableComponent from './Component/BootStrapTableComponent';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
@@ -46,20 +47,22 @@ class App extends React.Component {
           <MaterialTableComponent />
         )
       } else if (this.state.tableFlag === 3) {
-
+        return (
+          <BootStrapTableComponent />
+        )
       }
     }
     return (
       <span>
         <div className="App">
-          <h1>리액트 프로젝트</h1>
+          <h1>리액트 테이블 프로젝트</h1>
         </div>
-        <div style={{padding: '20px'}}>
+        <div style={{padding: '20px'}} align="center">
           <button className="btn btn-primary" style={{marginRight:'1rem'}} onClick={this.reactTableButtonClick}>ReactTableButton</button>
           <button className="btn btn-danger" style={{marginRight:'1rem'}} onClick={this.MaterialTableButtonClick}>MaterialTableButton</button>
           <button className="btn btn-warning" style={{marginRight:'20px'}} onClick={this.BootStrapTableButtonClick}>BootStrapTableButton</button>
         </div>
-        <div>
+        <div align="center">
             <TableComponent />
         </div>
       </span>

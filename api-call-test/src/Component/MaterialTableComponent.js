@@ -13,10 +13,10 @@ const StyledTableCell = withStyles(theme => ({
     head: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
-        fontSize: 20,
+        fontSize: 15,
     },
     body: {
-        fontSize: 15,
+        fontSize: 14,
     },
 }))(TableCell);
 
@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
         overflowX: 'auto',
     },
     table: {
+        // width:'50%',
         minWidth: 700,
     },
 }));
@@ -61,14 +62,12 @@ class MaterialTableComponent extends React.Component {
     render() {
         // 테이블의 column이 아닌 data 부분을 그려주는 함수
         const tableBody = () => {
-            let Table = [];
-            let TableData;
-        
+            let tableData;
             // response가 null이 아닌 경우만 테이블을 그려줌(null인 경우엔 map 함수가 정상 동작하지 않음)
             if (this.state.response != null) {
-                TableData = this.state.response.data.batchProgram;
+                tableData = this.state.response.data.batchProgram;
                 return (
-                    TableData.map(data => (
+                    tableData.map(data => (
                         <StyledTableRow key={data.batchProgramId.batchSeq}>
                             <StyledTableCell component="th" scope="row">{data.batchProgramId.systemId}</StyledTableCell>    
                             <StyledTableCell align='right'>{data.batchProgramId.batchSeq}</StyledTableCell>
@@ -98,7 +97,7 @@ class MaterialTableComponent extends React.Component {
             // 테이블의 column과 data부분을 그려줌
             <div className={useStyles.root}>
                 {/* <Paper className={useStyles.paper}> */}
-                    <Table className={useStyles.table}>
+                    <Table className={useStyles.table} style={{width:'80rem'}}>
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>배치프로그램시스템ID</StyledTableCell>
