@@ -10,7 +10,7 @@ import * as RESTAPI from '../Common/RestApi';
 
 class ReactTableComponent extends React.Component {
     state = {
-        response: null,
+        response: null, // 배치 전체 리스트 호출 응답
     }
     
     constructor(props) {
@@ -18,6 +18,7 @@ class ReactTableComponent extends React.Component {
         this.fetchBatchList();
     }
 
+    // 배치 전체 리스트를 호출하는 API를 호출하는 함수
     fetchBatchList = async () => {
         const response = await RESTAPI.getBatchList();
         this.setState({
@@ -30,7 +31,7 @@ class ReactTableComponent extends React.Component {
         const SelectTreeTable = SelectTableHOC(TreeTableHOC(ReactTable));
         const FoldableSelectTreeTable = FoldableTableHOC(SelectTreeTable);
         // const FoldableSelectTreeTable = SelectTableHOC(ReactTable);
-        let data;
+        let tableData;
         const columns = [{
             Header: '배치프로그램시스템ID',
             accessor: 'batchProgramId.systemId',
@@ -56,12 +57,12 @@ class ReactTableComponent extends React.Component {
             accessor: 'sendResultFile'
         }]
         if (this.state.response != null) {
-           data = this.state.response.data.batchProgram;
+            tableData = this.state.response.data.batchProgram;
         }
         const table = () => {
             return (
                 <FoldableSelectTreeTable 
-                    data={data} 
+                    data={tableData} 
                     columns={columns} 
                     defaultSorted={[{ id: 'batchProgramId.batchSeq', desc: false }]}/>
                 )
