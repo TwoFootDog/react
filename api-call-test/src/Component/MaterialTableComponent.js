@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import * as RESTAPI from '../Common/RestApi';
+import { green } from '@material-ui/core/colors';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -37,6 +38,12 @@ const useStyles = makeStyles(theme => ({
     table: {
         // width:'50%',
         minWidth: 700,
+    },
+    tr: {
+        background: '#61dafb',
+        '&:hover': {
+          background: '#61dafb',
+        }
     },
 }));
 
@@ -70,12 +77,12 @@ class MaterialTableComponent extends React.Component {
                     tableData.map(data => (
                         <StyledTableRow key={data.batchProgramId.batchSeq}>
                             <StyledTableCell component="th" scope="row">{data.batchProgramId.systemId}</StyledTableCell>    
-                            <StyledTableCell align='right'>{data.batchProgramId.batchSeq}</StyledTableCell>
-                            <StyledTableCell align='right'>{data.batchProgramId.batchProcId}</StyledTableCell>
-                            <StyledTableCell align='right'>{data.batchKoreanName}</StyledTableCell>
-                            <StyledTableCell align='right'>{data.hasInputFile}</StyledTableCell>
-                            <StyledTableCell align='right'>{data.fileId}</StyledTableCell>
-                            <StyledTableCell align='right'>{data.sendResultFile}</StyledTableCell>
+                            <StyledTableCell align="right">{data.batchProgramId.batchSeq}</StyledTableCell>
+                            <StyledTableCell align="right">{data.batchProgramId.batchProcId}</StyledTableCell>
+                            <StyledTableCell align="right">{data.batchKoreanName}</StyledTableCell>
+                            <StyledTableCell align="right">{data.hasInputFile}</StyledTableCell>
+                            <StyledTableCell align="right">{data.fileId}</StyledTableCell>
+                            <StyledTableCell align="right">{data.sendResultFile}</StyledTableCell>
                         </StyledTableRow>
                         // <TableRow key={data.batchProgramId.batchSeq}>
                         //     <TableCell component="th" scope="row">{data.batchProgramId.systemId}</TableCell>    
@@ -116,7 +123,7 @@ class MaterialTableComponent extends React.Component {
                                 <TableCell align='right'>결과파일전송구분</TableCell> */}
                             </TableRow>
                         </TableHead>
-                        <TableBody>
+                        <TableBody className={useStyles.tr}>
                             {tableBody()}
                         </TableBody>
                     </Table>

@@ -47,7 +47,7 @@ class BootStrapTableComponent extends React.Component {
         }
         return(
             <div>
-                <table className="table-hover" style={{width:'80rem'}}>
+                <table className="table table-hover" style={{width:'80rem'}}>
                     <caption>Batch Program List</caption>
                     <thead>
                         <tr>
