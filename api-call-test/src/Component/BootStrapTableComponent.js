@@ -29,15 +29,16 @@ class BootStrapTableComponent extends React.Component {
                 tableData = this.state.response.data.batchProgram;
                 return (
                     tableData.map((data, index) => (
-                        <tbody>
-                        <th scope="row">{data.batchProgramId.systemId}</th>
-                        <td>{data.batchProgramId.batchSeq}</td>
-                        <td>{data.batchProgramId.batchProcId}</td>
-                        <td>{data.batchKoreanName}</td>
-                        <td>{data.hasInputFile}</td>
-                        <td>{data.fileId}</td>
-                        <td>{data.sendResultFile}</td>
-                        </tbody>
+                        <tr key={index}>
+                            <th><input className="form-check-input" type="checkbox" value="" id="tableCheck"  /></th>
+                            <th scope="row">{data.batchProgramId.systemId}</th>
+                            <td>{data.batchProgramId.batchSeq}</td>
+                            <td>{data.batchProgramId.batchProcId}</td>
+                            <td>{data.batchKoreanName}</td>
+                            <td>{data.hasInputFile}</td>
+                            <td>{data.fileId}</td>
+                            <td>{data.sendResultFile}</td>
+                        </tr>
                     ))
                 )
             } else {
@@ -46,10 +47,11 @@ class BootStrapTableComponent extends React.Component {
         }
         return(
             <div>
-                <table class="table">
+                <table className="table-hover" style={{width:'80rem'}}>
                     <caption>Batch Program List</caption>
                     <thead>
                         <tr>
+                            <th scope="col">  </th>
                             <th scope="col">배치프로그램시스템ID</th>
                             <th scope='col'>배치순번</th>
                             <th scope='col'>배치프로세스ID</th>
@@ -59,7 +61,9 @@ class BootStrapTableComponent extends React.Component {
                             <th scope='col'>결과파일전송구분</th>
                         </tr>
                     </thead>
+                    <tbody>
                     {tableBody()}
+                    </tbody>
                 </table>
             </div>
         ); 
