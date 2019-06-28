@@ -1,8 +1,9 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import MyName from './MyName'
-import Counter from './Counter'
+import MyName from './Component/MyName'
+import Counter from './Component/Counter'
+import InputDataManage from './Component/InputDataManage'
 
 class App extends React.Component {
   render() {
@@ -17,7 +18,9 @@ class App extends React.Component {
           <MyName name="리액트" />
         </div>
         <div>
-          <Counter />
+          <div className="div-left-style"><Counter /></div>
+          <div className="div-center-style"><InputDataManage /></div>
+          <div className="div-right-style"><Counter /></div>
         </div>
       </span>
     )

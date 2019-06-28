@@ -28,6 +28,21 @@
   color: #61dafb;
 }
 
+.div-left-style {
+    width: 33%;
+    float: left;
+}
+
+.div-center-style {
+  width: 33%;
+  float: left;
+}
+
+.div-right-style {
+  width: 23%;
+  float: left;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

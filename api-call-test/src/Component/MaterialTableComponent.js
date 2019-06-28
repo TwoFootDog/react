@@ -39,12 +39,6 @@ const useStyles = makeStyles(theme => ({
         // width:'50%',
         minWidth: 700,
     },
-    tr: {
-        background: '#61dafb',
-        '&:hover': {
-          background: '#61dafb',
-        }
-    },
 }));
 
 class MaterialTableComponent extends React.Component {
@@ -75,7 +69,7 @@ class MaterialTableComponent extends React.Component {
                 tableData = this.state.response.data.batchProgram;
                 return (
                     tableData.map(data => (
-                        <StyledTableRow key={data.batchProgramId.batchSeq}>
+                        <StyledTableRow hover key={data.batchProgramId.batchSeq}>
                             <StyledTableCell component="th" scope="row">{data.batchProgramId.systemId}</StyledTableCell>    
                             <StyledTableCell align="right">{data.batchProgramId.batchSeq}</StyledTableCell>
                             <StyledTableCell align="right">{data.batchProgramId.batchProcId}</StyledTableCell>
@@ -84,14 +78,14 @@ class MaterialTableComponent extends React.Component {
                             <StyledTableCell align="right">{data.fileId}</StyledTableCell>
                             <StyledTableCell align="right">{data.sendResultFile}</StyledTableCell>
                         </StyledTableRow>
-                        // <TableRow key={data.batchProgramId.batchSeq}>
+                        // <TableRow hover key={data.batchProgramId.batchSeq}>
                         //     <TableCell component="th" scope="row">{data.batchProgramId.systemId}</TableCell>    
-                        //     <TableCell align='right'>{data.batchProgramId.batchSeq}</TableCell>
-                        //     <TableCell align='right'>{data.batchProgramId.batchProcId}</TableCell>
-                        //     <TableCell align='right'>{data.batchKoreanName}</TableCell>
-                        //     <TableCell align='right'>{data.hasInputFile}</TableCell>
-                        //     <TableCell align='right'>{data.fileId}</TableCell>
-                        //     <TableCell align='right'>{data.sendResultFile}</TableCell>
+                        //     <TableCell align="right">{data.batchProgramId.batchSeq}</TableCell>
+                        //     <TableCell align="right">{data.batchProgramId.batchProcId}</TableCell>
+                        //     <TableCell align="right">{data.batchKoreanName}</TableCell>
+                        //     <TableCell align="right">{data.hasInputFile}</TableCell>
+                        //     <TableCell align="right">{data.fileId}</TableCell>
+                        //     <TableCell align="right">{data.sendResultFile}</TableCell>
                         // </TableRow>
                     ))
                 )
