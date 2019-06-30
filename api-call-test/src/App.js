@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
-import ReactTableComponent from './Component/ReactTableComponent';
-import MaterialTableComponent from './Component/MaterialTableComponent';
-import BootStrapTableComponent from './Component/BootStrapTableComponent';
+import { Route } from 'react-router-dom';
+import About from './Layout/About';
+import TabButtonComponent from './Component/TabButtonComponent';
+import TableLayout from './Layout/TableLayout';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
@@ -11,59 +11,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  state = {
-    tableFlag: 1  // 1: reactTable, 2: MaterialTable, 3: BootstrapTable
-  };
-
-  reactTableButtonClick = () => {
-    console.log('reactTableButtonClick');
-    this.setState({
-      tableFlag: 1
-    });
-  }
-
-  MaterialTableButtonClick = () => {
-    console.log('MaterialTableButtonClick');
-    this.setState({
-      tableFlag: 2
-    });
-  }
-
-  BootStrapTableButtonClick = () => {
-    console.log('BootStrapTableButtonClick');
-    this.setState({
-      tableFlag: 3
-    });
-  }
 
   render() {
-    const TableComponent = () => {
-      if (this.state.tableFlag === 1) {
-        return (
-          <ReactTableComponent />
-        )
-      } else if (this.state.tableFlag === 2) {
-        return (
-          <MaterialTableComponent />
-        )
-      } else if (this.state.tableFlag === 3) {
-        return (
-          <BootStrapTableComponent />
-        )
-      }
-    }
     return (
       <span>
         <div className="App">
-          <h1>리액트 테이블 프로젝트</h1>
+          <h1>리액트 테스트 프로젝트</h1>
         </div>
-        <div style={{padding: '20px'}} align="center">
-          <button className="btn btn-primary" style={{marginRight:'1rem'}} onClick={this.reactTableButtonClick}>ReactTableButton</button>
-          <button className="btn btn-danger" style={{marginRight:'1rem'}} onClick={this.MaterialTableButtonClick}>MaterialTableButton</button>
-          <button className="btn btn-warning" style={{marginRight:'20px'}} onClick={this.BootStrapTableButtonClick}>BootStrapTableButton</button>
+        <div>
+          <TabButtonComponent/>
         </div>
         <div align="center">
-            <TableComponent />
+          <Route exact path="/" component={TableLayout} />
+          <Route path="/about" component={About} />
         </div>
       </span>
     );

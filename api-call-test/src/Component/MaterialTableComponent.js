@@ -60,6 +60,11 @@ class MaterialTableComponent extends React.Component {
         })
     }
 
+    handleClick = (event, data) => {
+        console.log("event" + event);
+        console.log("row" + data);
+    }
+
     render() {
         // 테이블의 column이 아닌 data 부분을 그려주는 함수
         const tableBody = () => {
@@ -69,7 +74,7 @@ class MaterialTableComponent extends React.Component {
                 tableData = this.state.response.data.batchProgram;
                 return (
                     tableData.map(data => (
-                        <StyledTableRow hover key={data.batchProgramId.batchSeq}>
+                        <StyledTableRow hover onClick={event => this.handleClick(event, data)} key={data.batchProgramId.batchSeq}>
                             <StyledTableCell component="th" scope="row">{data.batchProgramId.systemId}</StyledTableCell>    
                             <StyledTableCell align="right">{data.batchProgramId.batchSeq}</StyledTableCell>
                             <StyledTableCell align="right">{data.batchProgramId.batchProcId}</StyledTableCell>

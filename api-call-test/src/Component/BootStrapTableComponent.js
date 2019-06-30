@@ -22,6 +22,11 @@ class BootStrapTableComponent extends React.Component {
         })
     }
 
+    handleClick = (event, data) => {
+        console.log("event" + event);
+        console.log("row" + data);
+    }
+
     render() {
         const tableBody = () => {
             let tableData = [];
@@ -29,7 +34,7 @@ class BootStrapTableComponent extends React.Component {
                 tableData = this.state.response.data.batchProgram;
                 return (
                     tableData.map((data, index) => (
-                        <tr key={index}>
+                        <tr key={index} onClick={event => this.handleClick(event, data)}>
                             <th><input className="form-check-input" type="checkbox" value="" id="tableCheck"  /></th>
                             <th scope="row">{data.batchProgramId.systemId}</th>
                             <td>{data.batchProgramId.batchSeq}</td>

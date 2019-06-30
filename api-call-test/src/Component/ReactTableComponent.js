@@ -66,22 +66,22 @@ class ReactTableComponent extends React.Component {
         }
         const table = () => {
             return (
-                <ReactTable style={{width:'80rem'}}
+                <FoldableSelectTreeTable style={{width:'80rem'}}
                     data={tableData} 
                     columns={columns} 
-                    // defaultSorted={[{ id: 'batchProgramId.batchSeq', desc: false}]}
-                    // getTdProps={(state, rowInfo, column, instance) => {
-                    //     return {
-                    //       onClick: (e, handleOriginal) => {
-                    //         console.log('it produced this event:', e)
-                    //         console.log('It was in this column:', column)
-                    //         console.log('It was in this row:', rowInfo)
-                    //         console.log('It was in this table instance:', instance)
+                    defaultSorted={[{ id: 'batchProgramId.batchSeq', desc: false}]}
+                    getTdProps={(state, rowInfo, column, instance) => {
+                        return {
+                          onClick: (e, handleOriginal) => {
+                            console.log('it produced this event:', e)
+                            console.log('It was in this column:', column)
+                            console.log('It was in this row:', rowInfo)
+                            console.log('It was in this table instance:', instance)
                      
-                    //         if (handleOriginal) {
-                    //           handleOriginal()
-                    //         }
-                    //       }
+                            if (handleOriginal) {
+                              handleOriginal()
+                            }
+                          }
                         }
                       }}
                     />
