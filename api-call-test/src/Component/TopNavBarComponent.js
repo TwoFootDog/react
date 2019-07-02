@@ -75,14 +75,13 @@ const TopNavBarComponent = () => {
                       <Tab label="정산배치스케쥴러" component={Link} to="/about" />
                       {/* <Tab disabled style={{float: 'left', width: '1000rem'}} /> */}
                       {/* <Button color="inherit" style={{marginLeft: '70%'}}>Login</Button> */}
-                      <div style={{marginLeft: '70%'}}><Button color="inherit">Login</Button></div>
+                      <div style={{marginLeft: '65%'}}>
+                        {/* <Button color="inherit" component={Link} to="/SignIn">SIGN-IN</Button>
+                        <Button color="inherit" component={Link} to="/SignUp">SIGN-UP</Button> */}
+                      </div>
               </Tabs>
-              
-              
           </AppBar>
           </div>
-          
-          {/* <div><Button color="inherit" float="right" margin="1000px">Login</Button></div> */}
           </ThemeProvider>
         </div>
         

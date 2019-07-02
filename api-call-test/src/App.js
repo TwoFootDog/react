@@ -5,6 +5,8 @@ import Home from './Layout/Home';
 import TableLayout from './Layout/TableLayout';
 import Etc from './Layout/Etc';
 import About from './Layout/About';
+import SignIn from './Layout/SignIn';
+import SignUp from './Layout/SignUp';
 
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -29,6 +31,8 @@ class App extends React.Component {
           <Route exact path="/tables" component={TableLayout} />
           <Route path="/Etc" component={Etc} />
           <Route path="/about" component={About} />
+          <Route path="/SignIn" component={SignIn} />
+          <Route path="/SignUp" component={SignUp} />
         </div>
       </span>
     );
