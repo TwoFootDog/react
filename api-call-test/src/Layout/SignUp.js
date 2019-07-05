@@ -98,7 +98,7 @@ class SignUp extends React.Component {
     try {
       console.log(user);
       // await RESTAPI.registMember(user);
-      axios.post('http://127.0.0.1:8080/member/register', {user}, {headers: {'Content-Type': 'application/json'}})
+      axios.post('http://127.0.0.1:8080/member/register', JSON.stringify(user), {headers: {'Content-Type': 'application/json'}})
     } catch(err) {
       console.log(err);
     }
