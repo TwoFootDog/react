@@ -10,8 +10,9 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
 
 // function MadeWithLove() {
 //   return (
@@ -25,7 +26,7 @@ import Container from '@material-ui/core/Container';
 //   );
 // }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = theme => ({
   '@global': {
     body: {
       backgroundColor: theme.palette.common.white,
@@ -48,74 +49,107 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+});
 
-export default function SignIn() {
-  const classes = useStyles();
+class SignIn extends React.Component {
+  state = {
+    userId: null,
+    userPasswd: null,
+  }
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="filled"
-            margin="normal"
-            required
-            fullWidth
-            id="userId"
-            label="User ID"
-            name="userId"
-            // autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="filled"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            {/* <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid> */}
-            <Grid item xs>
-              <Link href="/SignUp" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+  constructor(props) {
+    super(props);
+  }
+
+  handleChange = (e) => {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+  }
+  handleSubmit = (e) => {
+    e.preventDefault(); // 페이징 리로딩 방지
+    const user = this.state;
+    try {
+      axios.post('http://127.0.0.1:8080/signin', JSON.stringify(user), { headers: {'content-type': 'application/json'}} )
+    } catch(err) {
+      console.log(err);
+    }
+  }
+  // const classes = useStyles();
+  render() {
+    const {classes} = this.props;
+    const {userId, userPasswd} = this.state;
+
+    return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
+            <TextField
+              variant="filled"
+              margin="normal"
+              required
+              fullWidth
+              id="userId"
+              label="User ID"
+              name="userId"
+              // autoComplete="email"
+              autoFocus
+              value={userId}
+              onChange={this.handleChange}
+            />
+            <TextField
+              variant="filled"
+              margin="normal"
+              required
+              fullWidth
+              name="userPasswd"
+              label="Password"
+              type="password"
+              id="userPasswd"
+              autoComplete="current-password"
+              value={userPasswd}
+              onChange={this.handleChange}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              {/* <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid> */}
+              <Grid item xs>
+                <Link href="/SignUp" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      {/* <Box mt={5}>
-        <MadeWithLove />
-      </Box> */}
-    </Container>
-  );
+          </form>
+        </div>
+        {/* <Box mt={5}>
+          <MadeWithLove />
+        </Box> */}
+      </Container>
+    );
+  }
 }
+
+export default withStyles(useStyles)(SignIn);

@@ -67,49 +67,33 @@ class SignUp extends React.Component {
     super(props);
   }
 
-  postSend = async () => {
-    // const {userId, userPasswd, userEmail, userFirstName, userLastName} = this.state;
-    const user = {
-      userId: this.state.userId,
-      userPasswd: this.state.userPasswd,
-      userEmail: this.state.userEmail,
-      userFirstName: this.state.userFirstName,
-      userLastName: this.state.userLastName,
-    }
-    try {
-      // await RESTAPI.registMember(user);
-      axios.post('http://127.0.0.1:8080/member/register', {user}, {headers: {'Content-Type': 'application/json'}})
-    } catch(err) {
-      console.log(err);
-    }
-  }
+  // postSend = async () => {
+  //   // const {userId, userPasswd, userEmail, userFirstName, userLastName} = this.state;
+  //   const user = {
+  //     userId: this.state.userId,
+  //     userPasswd: this.state.userPasswd,
+  //     userEmail: this.state.userEmail,
+  //     userFirstName: this.state.userFirstName,
+  //     userLastName: this.state.userLastName,
+  //   }
+  //   try {
+  //     // await RESTAPI.registMember(user);
+  //     axios.post('http://127.0.0.1:8080/member/register', {user}, {headers: {'Content-Type': 'application/json'}})
+  //   } catch(err) {
+  //     console.log(err);
+  //   }
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault(); // 페이지 리로딩 방지
-    // post function 호출
-    // this.postSend();
-    const user = {
-      userId: this.state.userId,
-      userPasswd: this.state.userPasswd,
-      userEmail: this.state.userEmail,
-      userFirstName: this.state.userFirstName,
-      userLastName: this.state.userLastName,
-    }
+    const user = this.state;  
     try {
       console.log(user);
       // await RESTAPI.registMember(user);
-      axios.post('http://127.0.0.1:8080/member/register', JSON.stringify(user), {headers: {'Content-Type': 'application/json'}})
+      axios.post('http://127.0.0.1:8080/signup', JSON.stringify(user), {headers: {'Content-Type': 'application/json'}})
     } catch(err) {
       console.log(err);
     }
-
-    // this.setState({
-    //   userId: null,
-    //   userPasswd: null,
-    //   userEmail: null,
-    //   userFirstName: null,
-    //   userLastName: null,
-    // })
   }
 
   handleChange = (e) => {
@@ -119,6 +103,7 @@ class SignUp extends React.Component {
   }
   render() {
     const {classes} = this.props;
+    const {userId, userPasswd, userEmail, userFirstName, userLastName} = this.state;
 
     return (
       <Container component="main" maxWidth="xs">
@@ -141,7 +126,7 @@ class SignUp extends React.Component {
                   fullWidth
                   id="userFirstName"
                   label="First Name"
-                  value={this.userFirstName}
+                  value={userFirstName}
                   onChange={this.handleChange}
                   autoFocus
                 />
@@ -155,7 +140,7 @@ class SignUp extends React.Component {
                   label="Last Name"
                   name="userLastName"
                   autoComplete="lname"
-                  value={this.userLastName}
+                  value={userLastName}
                   onChange={this.handleChange}
                 />
               </Grid>
@@ -168,7 +153,7 @@ class SignUp extends React.Component {
                   label="Email Address"
                   name="userEmail"
                   autoComplete="email"
-                  value={this.userEmail}
+                  value={userEmail}
                   onChange={this.handleChange}
                 />
               </Grid>
@@ -180,7 +165,7 @@ class SignUp extends React.Component {
                   id="userId"
                   label="User ID"
                   name="userId"
-                  value={this.userId}
+                  value={userId}
                   onChange={this.handleChange}
                   // autoComplete="email"
                 />
@@ -195,7 +180,7 @@ class SignUp extends React.Component {
                   type="password"
                   id="userPasswd"
                   autoComplete="current-password"
-                  value={this.userPasswd}
+                  value={userPasswd}
                   onChange={this.handleChange}
                 />
               </Grid>
