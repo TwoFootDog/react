@@ -76,8 +76,8 @@ const TopNavBarComponent = () => {
                       {/* <Tab disabled style={{float: 'left', width: '1000rem'}} /> */}
                       {/* <Button color="inherit" style={{marginLeft: '70%'}}>Login</Button> */}
                       <div style={{marginLeft: '65%'}}>
-                        {/* <Button color="inherit" component={Link} to="/SignIn">SIGN-IN</Button>
-                        <Button color="inherit" component={Link} to="/SignUp">SIGN-UP</Button> */}
+                        <Button color="inherit" component={Link} to="/SignIn">SIGN-IN</Button>
+                        <Button color="inherit" component={Link} to="/SignUp">SIGN-UP</Button>
                       </div>
               </Tabs>
           </AppBar>
