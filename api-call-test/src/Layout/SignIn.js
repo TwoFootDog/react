@@ -55,6 +55,7 @@ class SignIn extends React.Component {
   state = {
     userId: null,
     userPasswd: null,
+    token: null,
   }
 
   constructor(props) {
@@ -66,15 +67,30 @@ class SignIn extends React.Component {
         [e.target.name]: e.target.value
     })
   }
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault(); // 페이징 리로딩 방지
     const user = this.state;
+    let value = null
     try {
-      axios.post('http://127.0.0.1:8080/signin', JSON.stringify(user), { headers: {'content-type': 'application/json'}} )
+      value = await axios.post('http://127.0.0.1:8080/signin', JSON.stringify(user), { headers: {'content-type': 'application/json'}} )
     } catch(err) {
       console.log(err);
     }
+    if (value != null) {
+      console.log('userId : ' + value.data.userId);
+      console.log('authorities : ' + value.data.authorities);
+      console.log('token : ' + value.data.token);
+    }
+    this.setState({
+      token: value.data.token,
+    })
   }
+
+  componentWillUpdate(nextProps, nextState) {
+    // shouldComponentUpdate가 true를 반환했을 때만 호출됨
+    console.log('componentWillUpdate');
+}
+
   // const classes = useStyles();
   render() {
     const {classes} = this.props;
