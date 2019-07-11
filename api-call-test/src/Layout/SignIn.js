@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Home from './Home';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 // function MadeWithLove() {
@@ -51,11 +53,14 @@ const useStyles = theme => ({
   },
 });
 
+const loginFailString = 'your username/password is invalid';
+
 class SignIn extends React.Component {
   state = {
     userId: null,
     userPasswd: null,
     token: null,
+    message: null,
   }
 
   constructor(props) {
@@ -80,10 +85,20 @@ class SignIn extends React.Component {
       console.log('userId : ' + value.data.userId);
       console.log('authorities : ' + value.data.authorities);
       console.log('token : ' + value.data.token);
+      this.setState({
+        token: value.data.token,
+      })
+      this.props.function1(value.data.userId);
+      this.props.history.push(`/`); // 로그인에 성공했을 경우 root로 이동
+    } else {
+      console.log('fire');
+      this.setState({
+        message: loginFailString,
+      })
+      this.props.history.push(`/signin`); // 로그인에 성공했을 경우 root로 이동
     }
-    this.setState({
-      token: value.data.token,
-    })
+
+    
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -94,7 +109,7 @@ class SignIn extends React.Component {
   // const classes = useStyles();
   render() {
     const {classes} = this.props;
-    const {userId, userPasswd} = this.state;
+    const {userId, userPasswd, token, message} = this.state;
 
     return (
       <Container component="main" maxWidth="xs">
@@ -137,12 +152,13 @@ class SignIn extends React.Component {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <div style={{color: 'red'}}>{message}</div>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              className={classes.submit}              
             >
               Sign In
             </Button>
@@ -168,4 +184,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(SignIn);
+export default withStyles(useStyles)(withRouter(SignIn));
