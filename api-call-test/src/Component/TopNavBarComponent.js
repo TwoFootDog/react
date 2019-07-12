@@ -34,10 +34,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const TopNavBarComponent = () => {
+const TopNavBarComponent = (props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const [anchorE1, setAnchorE1] = React.useState(null);
+    let signButton = [];
 
     function handleClick(event) {
         event.stopPropagation();
@@ -52,6 +53,15 @@ const TopNavBarComponent = () => {
       console.log('newValue : ' + newValue);
         setValue(newValue);
     }
+
+    console.log(props.isLogin);
+    if (!props.isLogin) {
+      signButton.push(<Button color="inherit" component={Link} to="/SignIn">SIGN-IN</Button>);
+      signButton.push(<Button color="inherit" component={Link} to="/SignUp">SIGN-UP</Button>);
+    } else {
+      signButton.push(<span>SIGN-OUT</span>);
+    }
+    console.log(props.isLogin);
 
     return (
       <span>
@@ -76,8 +86,7 @@ const TopNavBarComponent = () => {
                       {/* <Tab disabled style={{float: 'left', width: '1000rem'}} /> */}
                       {/* <Button color="inherit" style={{marginLeft: '70%'}}>Login</Button> */}
                       <div style={{marginLeft: '65%'}}>
-                        <Button color="inherit" component={Link} to="/SignIn">SIGN-IN</Button>
-                        <Button color="inherit" component={Link} to="/SignUp">SIGN-UP</Button>
+                        {signButton}
                       </div>
               </Tabs>
           </AppBar>
