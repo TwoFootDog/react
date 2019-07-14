@@ -23,12 +23,15 @@ class App extends React.Component {
     super(props);
   }
 
-  handleUserId = (userId) => {
+  handleUserInfo = (userId, token) => {
     this.setState({
       userId: userId,
+      token: token,
       isLogin: true,
     })
     console.log(userId);
+    console.log(token);
+    console.log('after sign in : ' + window.localStorage.getItem('token')); // local에 있는 token 정보를 가져온다
   }
 
   render() {
@@ -46,7 +49,7 @@ class App extends React.Component {
           <Route path="/tables" render = {() => <TableLayout/>}/>
           <Route path="/etc" render = {() => <Etc/>}/>
           <Route path="/about" render = {() => <About/>}/>
-          <Route path="/signin" render = {() => <SignIn function1={this.handleUserId}/>}/>
+          <Route path="/signin" render = {() => <SignIn handleUserInfo={this.handleUserInfo}/>}/>
           {/* <Route path="/signin" render = {() => <SignIn/>}/> */}
           <Route path="/signup" render = {() => <SignUp/>}/>
 

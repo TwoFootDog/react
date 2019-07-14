@@ -73,6 +73,7 @@ class SignIn extends React.Component {
     })
   }
   handleSubmit = async (e) => {
+    console.log('before sign in : ' + window.localStorage.getItem('token'));
     e.preventDefault(); // 페이징 리로딩 방지
     const user = this.state;
     let value = null
@@ -88,7 +89,10 @@ class SignIn extends React.Component {
       this.setState({
         token: value.data.token,
       })
-      this.props.function1(value.data.userId);
+      this.props.handleUserInfo(value.data.userId, value.data.token);
+      window.localStorage.removeItem('token');  // local에 있는 token 정보를 삭제한다
+      window.localStorage.clear();  // local 정보를 삭제한다
+      window.localStorage.setItem('token', value.data.token); // local의 token정보를 갱신한다
       this.props.history.push(`/`); // 로그인에 성공했을 경우 root로 이동
     } else {
       console.log('fire');
