@@ -33,9 +33,18 @@ class App extends React.Component {
     console.log(token);
     console.log('after sign in : ' + window.localStorage.getItem('token')); // local에 있는 token 정보를 가져온다
   }
+  componentWillMount = () => {
+    // 컴포넌트가 화면에 나가기 직전에 호출됨
+    console.log('componentWillMount (deprecated)');
+}
 
+componentDidMount = () => {
+    // 컴포넌트가 화면에 나타나게 됐을 때 호출됨
+    console.log('componentDidMount');
+}
   render() {
     const { isLogin } = this.state;
+    console.log("start>>>>>>>>>>>>>>>>>>>>>>>>");
     return (
       <span>
         <div className="App">
