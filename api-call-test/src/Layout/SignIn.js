@@ -115,6 +115,11 @@ class SignIn extends React.Component {
     const {classes} = this.props;
     const {userId, userPasswd, token, message} = this.state;
 
+    if (this.props.isLogin) {
+      console.log('already sign in');
+      this.props.history.push('/');
+    }
+
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />

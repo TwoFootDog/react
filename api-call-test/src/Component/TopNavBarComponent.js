@@ -59,7 +59,7 @@ const TopNavBarComponent = (props) => {
       signButton.push(<Button color="inherit" component={Link} to="/SignIn">SIGN-IN</Button>);
       signButton.push(<Button color="inherit" component={Link} to="/SignUp">SIGN-UP</Button>);
     } else {
-      signButton.push(<span>SIGN-OUT</span>);
+      signButton.push(<Button color="inherit" component={Link} to="/SignIn" onClick={props.handleSignOut}>SIGN-OUT</Button>);
     }
     console.log(props.isLogin);
 

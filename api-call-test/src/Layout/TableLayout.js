@@ -3,6 +3,7 @@ import TableSelectButtonComponent from '../Component/TableSelectButtonComponent'
 import ReactTableComponent from '../Component/ReactTableComponent';
 import MaterialTableComponent from '../Component/MaterialTableComponent';
 import BootStrapTableComponent from '../Component/BootStrapTableComponent';
+import { withRouter } from 'react-router-dom';
 
 class TableLayout extends React.Component {
   state = {
@@ -20,6 +21,11 @@ class TableLayout extends React.Component {
   }
 
   render() {
+    if (!this.props.isLogin) {
+      console.log("not signin");
+      this.props.history.push('/signin');
+    }
+    
     const {tableFlag} = this.state;
     const TableComponent = () => {
       if (tableFlag === 1) {
@@ -47,4 +53,4 @@ class TableLayout extends React.Component {
   }
 }
 
-export default TableLayout;
+export default withRouter(TableLayout);

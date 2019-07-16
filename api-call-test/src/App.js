@@ -33,14 +33,23 @@ class App extends React.Component {
     console.log(token);
     console.log('after sign in : ' + window.localStorage.getItem('token')); // local에 있는 token 정보를 가져온다
   }
+
+  handleSignOut = () => {
+    console.log('signout');
+    this.setState({
+      ...this.state,
+      isLogin: false,
+    })
+  }
+
   componentWillMount = () => {
     // 컴포넌트가 화면에 나가기 직전에 호출됨
-    console.log('componentWillMount (deprecated)');
+    console.log('App componentWillMount (deprecated)');
 }
 
 componentDidMount = () => {
     // 컴포넌트가 화면에 나타나게 됐을 때 호출됨
-    console.log('componentDidMount');
+    console.log('App componentDidMount');
 }
   render() {
     const { isLogin } = this.state;
@@ -51,14 +60,14 @@ componentDidMount = () => {
           <h1>리액트 테스트 프로젝트</h1>
         </div>
         <div>
-          <TopNavBarComponent isLogin={isLogin}/>
+          <TopNavBarComponent isLogin={isLogin} handleSignOut={this.handleSignOut}/>
         </div>
         <div align="center">
           <Route exact path="/" render = {() => <Home/>}/>
-          <Route path="/tables" render = {() => <TableLayout/>}/>
-          <Route path="/etc" render = {() => <Etc/>}/>
-          <Route path="/about" render = {() => <About/>}/>
-          <Route path="/signin" render = {() => <SignIn handleUserInfo={this.handleUserInfo}/>}/>
+          <Route path="/tables" render = {() => <TableLayout isLogin={isLogin}/>}/>
+          <Route path="/etc" render = {() => <Etc isLogin={isLogin}/>}/>
+          <Route path="/about" render = {() => <About isLogin={isLogin}/>}/>
+          <Route path="/signin" render = {() => <SignIn isLogin={isLogin} handleUserInfo={this.handleUserInfo}/>}/>
           {/* <Route path="/signin" render = {() => <SignIn/>}/> */}
           <Route path="/signup" render = {() => <SignUp/>}/>
 
