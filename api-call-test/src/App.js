@@ -8,10 +8,12 @@ import About from './Layout/About';
 import SignIn from './Layout/SignIn';
 import SignUp from './Layout/SignUp';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
+import Axios from 'axios';
 
 class App extends React.Component {
   state = {
@@ -21,6 +23,19 @@ class App extends React.Component {
   }
   constructor(props) {
     super(props);
+    this.tokenValidChk();
+  }
+
+  tokenValidChk = async () => {
+    const isTokenValid = await axios.post(
+                                    "http://127.0.0.1:8080/signin",
+                                    {headers: {'X-AUTH-TOKEN' : window.localStorage.getItem('token')}});
+    console.log('isTokenValid >>>>>>>>>>>' + isTokenValid.data);
+    console.log('send token >>>>>>>>>>>' + window.localStorage.getItem('token'));
+    this.setState({
+      ...this.state,
+      isLogin: true,
+    })
   }
 
   handleUserInfo = (userId, token) => {
@@ -40,6 +55,8 @@ class App extends React.Component {
       ...this.state,
       isLogin: false,
     })
+    window.localStorage.removeItem('token') // 로그아웃 시 local에 있는 token 정보를 삭제한다
+    console.log('window.localStorage.getItem>>>>>>>>>>' + window.localStorage.getItem('token'));
   }
 
   componentWillMount = () => {
