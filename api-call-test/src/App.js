@@ -27,9 +27,9 @@ class App extends React.Component {
   }
 
   tokenValidChk = async () => {
-    console.log('tokenvalidchk start>>>>>>>>>>>'+ window.localStorage.getItem('token'));
-    const isTokenValid = await axios.post(
-                                    "http://127.0.0.1:8080/signin",
+    console.log('tokenvalidchk start>>>>>>>>>>>>'+ window.localStorage.getItem('token'));
+    const isTokenValid = await axios.get(
+                                    "http://127.0.0.1:8080/getUserInfo",
                                     {headers: {'X-AUTH-TOKEN' : window.localStorage.getItem('token')}});
     console.log('isTokenValid >>>>>>>>>>>' + isTokenValid.data);
     console.log('send token >>>>>>>>>>>' + window.localStorage.getItem('token'));
