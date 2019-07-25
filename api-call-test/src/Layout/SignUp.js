@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 // import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import * as RESTAPI from '../Common/RestApi';
+import * as RestApi from '../Common/RestApi';
 import axios from 'axios';
 
 // function MadeWithLove() {
@@ -84,15 +84,14 @@ class SignUp extends React.Component {
   //   }
   // }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault(); // 페이지 리로딩 방지
     const user = this.state;  
     try {
-      console.log(user);
-      // await RESTAPI.registMember(user);
-      axios.post('http://127.0.0.1:8080/signup', JSON.stringify(user), {headers: {'Content-Type': 'application/json'}})
+      const result = await RestApi.signUp(user);
+      console.log('SignUp Api Call Success : ' + JSON.stringify(result));
     } catch(err) {
-      console.log(err);
+      console.log('SignUp Api Call Fail : ' + err);
     }
   }
 

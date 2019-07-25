@@ -12,9 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Home from './Home';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import * as RestApi from '../Common/RestApi';
 
 // function MadeWithLove() {
 //   return (
@@ -72,37 +72,32 @@ class SignIn extends React.Component {
         [e.target.name]: e.target.value
     })
   }
+
   handleSubmit = async (e) => {
-    console.log('before sign in : ' + window.localStorage.getItem('token'));
     e.preventDefault(); // 페이징 리로딩 방지
     const user = this.state;
-    let value = null
+    let result = null;
+
     try {
-      value = await axios.post('http://127.0.0.1:8080/signin', JSON.stringify(user), { headers: {'content-type': 'application/json'}} )
+      result = await RestApi.signIn(user);
+      console.log('SignIn Api Call Success : ' + result);
     } catch(err) {
-      console.log(err);
+      console.log('SignIn API Call Fail : ' + err);
     }
-    if (value != null) {
-      console.log('userId : ' + value.data.userId);
-      console.log('authorities : ' + value.data.authorities);
-      console.log('token : ' + value.data.token);
-      this.setState({
-        token: value.data.token,
-      })
-      this.props.handleUserInfo(value.data.userId, value.data.token);
-      window.localStorage.removeItem('token');  // local에 있는 token 정보를 삭제한다
+
+    if (result != null) {
+
+      this.props.handleUserInfo(result.data.userId, result.data.token); // userId와 token정보를 parent component로 전달
       window.localStorage.clear();  // local 정보를 삭제한다
-      window.localStorage.setItem('token', value.data.token); // local의 token정보를 갱신한다
+      window.localStorage.setItem('token', result.data.token); // local의 token정보 갱신
       this.props.history.push(`/`); // 로그인에 성공했을 경우 root로 이동
     } else {
       console.log('fire');
       this.setState({
         message: loginFailString,
       })
-      this.props.history.push(`/signin`); // 로그인에 성공했을 경우 root로 이동
+      this.props.history.push(`/signin`); // 로그인에 실패했을 경우 /signin으로 이동
     }
-
-    
   }
 
   componentWillUpdate(nextProps, nextState) {
