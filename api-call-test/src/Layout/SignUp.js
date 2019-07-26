@@ -3,30 +3,17 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 // import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import * as RestApi from '../Common/RestApi';
-import axios from 'axios';
-
-// function MadeWithLove() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Built with love by the '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Material-UI
-//       </Link>
-//       {' team.'}
-//     </Typography>
-//   );
-// }
 
 const useStyles = theme => ({
   '@global': {
@@ -63,26 +50,9 @@ class SignUp extends React.Component {
     userLastName: null,
   }
 
-  constructor(props) {
+  /*constructor(props) {
     super(props);
-  }
-
-  // postSend = async () => {
-  //   // const {userId, userPasswd, userEmail, userFirstName, userLastName} = this.state;
-  //   const user = {
-  //     userId: this.state.userId,
-  //     userPasswd: this.state.userPasswd,
-  //     userEmail: this.state.userEmail,
-  //     userFirstName: this.state.userFirstName,
-  //     userLastName: this.state.userLastName,
-  //   }
-  //   try {
-  //     // await RESTAPI.registMember(user);
-  //     axios.post('http://127.0.0.1:8080/member/register', {user}, {headers: {'Content-Type': 'application/json'}})
-  //   } catch(err) {
-  //     console.log(err);
-  //   }
-  // }
+  }*/
 
   handleSubmit = async (e) => {
     e.preventDefault(); // 페이지 리로딩 방지

@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+// import PropTypes from 'prop-types';
+// import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography'; 
+// import Typography from '@material-ui/core/Typography'; 
 import { Link } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,7 +15,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { cyan, blue, red } from '@material-ui/core/colors';
 
 // import SvgIcon from '@material-ui/core/SvgIcon';
-import HomeIcon from '@material-ui/icons/Home';
+// import HomeIcon from '@material-ui/icons/Home';
 
 // 테마 변경
 const theme = createMuiTheme({
@@ -26,16 +26,15 @@ const theme = createMuiTheme({
   }
 })
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         width: '100%',
         backgroundColor: theme.palette.background.paper,
     },
-}));
+}));*/
 
 const TopNavBarComponent = (props) => {
-    const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const [anchorE1, setAnchorE1] = React.useState(null);
     let signButton = [];
@@ -56,10 +55,10 @@ const TopNavBarComponent = (props) => {
 
     console.log(props.isLogin);
     if (!props.isLogin) {
-      signButton.push(<Button color="inherit" component={Link} to="/SignIn">SIGN-IN</Button>);
-      signButton.push(<Button color="inherit" component={Link} to="/SignUp">SIGN-UP</Button>);
+      signButton.push(<Button color="inherit" component={Link} to="/SignIn" key="signin">SIGN-IN</Button>);
+      signButton.push(<Button color="inherit" component={Link} to="/SignUp" key="signup">SIGN-UP</Button>);
     } else {
-      signButton.push(<Button color="inherit" component={Link} to="/SignIn" onClick={props.handleSignOut}>SIGN-OUT</Button>);
+      signButton.push(<Button color="inherit" component={Link} to="/SignIn" onClick={props.handleSignOut} key="signout">SIGN-OUT</Button>);
     }
     console.log(props.isLogin);
 
@@ -70,7 +69,6 @@ const TopNavBarComponent = (props) => {
           <ThemeProvider theme={theme}>
           <div>
             <AppBar position="static">
-            
               <Tabs 
                   value={value}
                   onChange={handleChange}

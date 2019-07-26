@@ -10,10 +10,6 @@ class TableLayout extends React.Component {
     tableFlag: 1  // 1: reactTable, 2: MaterialTable, 3: BootstrapTable
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   TableButtonClick = (tableFlag) => {
     this.setState({
       tableFlag: tableFlag

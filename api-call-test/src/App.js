@@ -7,13 +7,10 @@ import Etc from './Layout/Etc';
 import About from './Layout/About';
 import SignIn from './Layout/SignIn';
 import SignUp from './Layout/SignUp';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import axios from 'axios';
-
-
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
-import Axios from 'axios';
 
 class App extends React.Component {
   state = {
@@ -27,12 +24,10 @@ class App extends React.Component {
   }
 
   tokenValidChk = async () => {
-    console.log('tokenvalidchk start>>>>>>>>>>>>'+ window.localStorage.getItem('token'));
-    const isTokenValid = await axios.get(
+    const userInfo = await axios.get(
                                     "http://127.0.0.1:8080/getUserInfo",
                                     {headers: {'X-AUTH-TOKEN' : window.localStorage.getItem('token')}});
-    console.log('isTokenValid >>>>>>>>>>>' + isTokenValid.data);
-    console.log('send token >>>>>>>>>>>' + window.localStorage.getItem('token'));
+    console.log('userInfo >>>>>>>>>>>' + userInfo.data);
     this.setState({
       ...this.state,
       isLogin: true,
@@ -45,9 +40,6 @@ class App extends React.Component {
       token: token,
       isLogin: true,
     })
-    console.log(userId);
-    console.log(token);
-    console.log('after sign in : ' + window.localStorage.getItem('token')); // local에 있는 token 정보를 가져온다
   }
 
   handleSignOut = () => {

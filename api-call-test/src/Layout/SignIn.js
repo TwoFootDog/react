@@ -7,13 +7,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 import * as RestApi from '../Common/RestApi';
 
 // function MadeWithLove() {
@@ -63,9 +62,9 @@ class SignIn extends React.Component {
     message: null,
   }
 
-  constructor(props) {
+/*  constructor(props) {
     super(props);
-  }
+  }*/
 
   handleChange = (e) => {
     this.setState({
@@ -108,7 +107,7 @@ class SignIn extends React.Component {
   // const classes = useStyles();
   render() {
     const {classes} = this.props;
-    const {userId, userPasswd, token, message} = this.state;
+    const {userId, userPasswd, message} = this.state;
 
     if (this.props.isLogin) {
       console.log('already sign in');
