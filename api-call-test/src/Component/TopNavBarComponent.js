@@ -1,6 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 // import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -26,15 +27,24 @@ const theme = createMuiTheme({
   }
 })
 
-/*const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        width: '100%',
-        backgroundColor: theme.palette.background.paper,
+const useStyles = makeStyles(theme => ({
+    tab: {
+        // flexGrow: 1,
+        // width: '100%',
+        // backgroundColor: theme.palette.background.paper,
+        background: '#1fc5a9',//'linear-gradient(45deg, #1ff1a9 30%, #1fc5a9 90%)',
+        // border: 0,
+        // borderRadius: 3,
+        // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        color: 'white',
+        height: 48,
+        // padding: '0 30px',
     },
-}));*/
+}));
 
 const TopNavBarComponent = (props) => {
+    const classes = useStyles();
+
     const [value, setValue] = React.useState(0);
     const [anchorE1, setAnchorE1] = React.useState(null);
     let signButton = [];
@@ -65,11 +75,12 @@ const TopNavBarComponent = (props) => {
     return (
       <span>
         {/* <div style={{float: 'left', width:'90%'}}> */}
-        <div>
-          <ThemeProvider theme={theme}>
+        <div className={classes.tab}>
+          {/* <ThemeProvider theme={theme}> */}
           <div>
             <AppBar position="static">
               <Tabs 
+                  className={classes.tab}
                   value={value}
                   onChange={handleChange}
                   indicatorColor="secondary"
@@ -78,9 +89,9 @@ const TopNavBarComponent = (props) => {
                   scrollButtons="auto">
                       {/* <HomeIcon className={classes.icon} component={Link} to="/" /> */}
                       {/* <Tab icon={<HomeIcon  />} aria-label="Home" component={Link} to="/" /> */}
-                      <Tab label="Home" component={Link} to="/" />
-                      <Tab label="TP배치스케쥴러" onClick={handleClick} />
-                      <Tab label="정산배치스케쥴러" component={Link} to="/about" />
+                      <Tab className={classes.tab} label="Home" component={Link} to="/" />
+                      <Tab className={classes.tab} label="TP배치스케쥴러" onClick={handleClick} />
+                      <Tab className={classes.tab} label="정산배치스케쥴러" component={Link} to="/about" />
                       {/* <Tab disabled style={{float: 'left', width: '1000rem'}} /> */}
                       {/* <Button color="inherit" style={{marginLeft: '70%'}}>Login</Button> */}
                       <div style={{marginLeft: '65%'}}>
@@ -89,7 +100,7 @@ const TopNavBarComponent = (props) => {
               </Tabs>
           </AppBar>
           </div>
-          </ThemeProvider>
+          {/* </ThemeProvider> */}
         </div>
         
         <div>

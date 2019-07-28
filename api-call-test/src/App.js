@@ -8,9 +8,9 @@ import About from './Layout/About';
 import SignIn from './Layout/SignIn';
 import SignUp from './Layout/SignUp';
 // import {Link} from 'react-router-dom';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
+import * as RestApi from './Common/RestApi';
 
 class App extends React.Component {
   state = {
@@ -24,9 +24,7 @@ class App extends React.Component {
   }
 
   tokenValidChk = async () => {
-    const userInfo = await axios.get(
-                                    "http://127.0.0.1:8080/getUserInfo",
-                                    {headers: {'X-AUTH-TOKEN' : window.localStorage.getItem('token')}});
+    const userInfo = await RestApi.getUserInfo();
     console.log('userInfo >>>>>>>>>>>' + userInfo.data);
     this.setState({
       ...this.state,
@@ -49,17 +47,14 @@ class App extends React.Component {
       isLogin: false,
     })
     window.localStorage.removeItem('token') // 로그아웃 시 local에 있는 token 정보를 삭제한다
-    console.log('window.localStorage.getItem>>>>>>>>>>' + window.localStorage.getItem('token'));
   }
 
   componentWillMount = () => {
     // 컴포넌트가 화면에 나가기 직전에 호출됨
-    console.log('App componentWillMount (deprecated)');
 }
 
 componentDidMount = () => {
     // 컴포넌트가 화면에 나타나게 됐을 때 호출됨
-    console.log('App componentDidMount');
 }
   render() {
     const { isLogin } = this.state;
