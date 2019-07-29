@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 // import { makeStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -10,6 +11,7 @@ import { Link } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import styles from '../Css/NavBar.module.css';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -18,14 +20,6 @@ import { cyan, blue, red } from '@material-ui/core/colors';
 // import SvgIcon from '@material-ui/core/SvgIcon';
 // import HomeIcon from '@material-ui/icons/Home';
 
-// 테마 변경
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-    secondary: cyan,
-    error: red,
-  }
-})
 
 const useStyles = makeStyles(theme => ({
     tab: {
@@ -41,6 +35,12 @@ const useStyles = makeStyles(theme => ({
         // padding: '0 30px',
     },
 }));
+
+const ButtonComponent = styled('button')(({theme}) =>({
+  backgroundColor: '#1fc5a9',
+  color: 'white',
+}));
+
 
 const TopNavBarComponent = (props) => {
     const classes = useStyles();
@@ -65,42 +65,46 @@ const TopNavBarComponent = (props) => {
 
     console.log(props.isLogin);
     if (!props.isLogin) {
-      signButton.push(<Button color="inherit" component={Link} to="/SignIn" key="signin">SIGN-IN</Button>);
-      signButton.push(<Button color="inherit" component={Link} to="/SignUp" key="signup">SIGN-UP</Button>);
+      signButton.push(<Button className={styles.SignButtonSingle} component={Link} to="/SignIn" key="signin">SIGN-IN</Button>);
+      signButton.push(<Button className={styles.SignButtonSingle} component={Link} to="/SignUp" key="signup">SIGN-UP</Button>);
     } else {
-      signButton.push(<Button color="inherit" component={Link} to="/SignIn" onClick={props.handleSignOut} key="signout">SIGN-OUT</Button>);
+      signButton.push(<Button className={styles.SignButtonSingle} component={Link} to="/SignIn" onClick={props.handleSignOut} key="signout">SIGN-OUT</Button>);
     }
     console.log(props.isLogin);
+    // console.log('styles >>>>>> ' + styles.NavBar);
 
     return (
       <span>
         {/* <div style={{float: 'left', width:'90%'}}> */}
-        <div className={classes.tab}>
+        <div>
           {/* <ThemeProvider theme={theme}> */}
           <div>
             <AppBar position="static">
               <Tabs 
-                  className={classes.tab}
+                  className={styles.Tabs}
                   value={value}
                   onChange={handleChange}
-                  indicatorColor="secondary"
-                  textColor="secondary"
-                  variant="standard"
-                  scrollButtons="auto">
+                  // indicatorColor="secondary"
+                  // textColor="secondary"
+                  // variant="standard"
+                  // scrollButtons="auto"
+                  >
                       {/* <HomeIcon className={classes.icon} component={Link} to="/" /> */}
                       {/* <Tab icon={<HomeIcon  />} aria-label="Home" component={Link} to="/" /> */}
-                      <Tab className={classes.tab} label="Home" component={Link} to="/" />
-                      <Tab className={classes.tab} label="TP배치스케쥴러" onClick={handleClick} />
-                      <Tab className={classes.tab} label="정산배치스케쥴러" component={Link} to="/about" />
-                      {/* <Tab disabled style={{float: 'left', width: '1000rem'}} /> */}
-                      {/* <Button color="inherit" style={{marginLeft: '70%'}}>Login</Button> */}
-                      <div style={{marginLeft: '65%'}}>
+                      <Tab label="Home" component={Link} to="/" />
+                      <Tab label="TP배치스케쥴러" onClick={handleClick} />
+                      <Tab label="정산배치스케쥴러" component={Link} to="/about" />
+                      {/* <Tab label="" style={{marginLeft: '50%'}} disabled="true" /> */}
+                      {/* <div style={{marginLeft: '35%'}}> */}
+                      <div className={styles.SignButtonGroup}>
                         {signButton}
                       </div>
               </Tabs>
           </AppBar>
-          </div>
-          {/* </ThemeProvider> */}
+        </div>
+        {/* <div className={styles.divRight}>
+          {signButton}
+        </div> */}
         </div>
         
         <div>
