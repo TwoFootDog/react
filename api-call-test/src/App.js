@@ -11,6 +11,7 @@ import SignUp from './Layout/SignUp';
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
 import * as RestApi from './Common/RestApi';
+import Welcome from './Layout/Welcome';
 
 class App extends React.Component {
   state = {
@@ -62,7 +63,7 @@ componentDidMount = () => {
     return (
       <span>
         <div className="App">
-          <h1>리액트 테스트 프로젝트</h1>
+          <h1>배치 현황판</h1>
         </div>
         <div>
           <TopNavBarComponent isLogin={isLogin} handleSignOut={this.handleSignOut}/>
@@ -73,8 +74,8 @@ componentDidMount = () => {
           <Route path="/etc" render = {() => <Etc isLogin={isLogin}/>}/>
           <Route path="/about" render = {() => <About isLogin={isLogin}/>}/>
           <Route path="/signin" render = {() => <SignIn isLogin={isLogin} handleUserInfo={this.handleUserInfo}/>}/>
-          {/* <Route path="/signin" render = {() => <SignIn/>}/> */}
           <Route path="/signup" render = {() => <SignUp/>}/>
+          <Route path="/welcome" render= {() => <Welcome/>}/>
 
           {/* <Route exact path="/" component={Home} />
           <Route exact path="/tables" component={TableLayout} />

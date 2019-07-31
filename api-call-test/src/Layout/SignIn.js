@@ -14,6 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { withRouter } from 'react-router-dom';
 import * as RestApi from '../Common/RestApi';
+import { cyan } from '@material-ui/core/colors';
 
 // function MadeWithLove() {
 //   return (
@@ -49,6 +50,8 @@ const useStyles = theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: 'darkcyan',
+    color: 'white',
   },
 });
 
@@ -160,7 +163,6 @@ class SignIn extends React.Component {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
               className={classes.submit}              
             >
               Sign In

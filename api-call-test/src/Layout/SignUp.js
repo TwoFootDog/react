@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 // import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import * as RestApi from '../Common/RestApi';
 
@@ -37,6 +38,8 @@ const useStyles = theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: 'darkcyan',
+    color: 'white',
   },
 });
 
@@ -60,6 +63,7 @@ class SignUp extends React.Component {
     try {
       const result = await RestApi.signUp(user);
       console.log('SignUp Api Call Success : ' + JSON.stringify(result));
+      this.props.history.push('/welcome');  // welcome 페이지로 이동
     } catch(err) {
       console.log('SignUp Api Call Fail : ' + err);
     }
@@ -164,7 +168,7 @@ class SignUp extends React.Component {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              // color="primary"
               className={classes.submit}
             >
               Sign Up
@@ -186,4 +190,4 @@ class SignUp extends React.Component {
   }
   
 }
-export default withStyles(useStyles)(SignUp);
+export default withStyles(useStyles)(withRouter(SignUp));
