@@ -14,63 +14,73 @@ import Button from '@material-ui/core/Button';
 import styles from '../Css/NavBar.module.css';
 
 import PersonPinIcon from '@material-ui/icons/PersonPin';
+import { Toolbar } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 
 // import SvgIcon from '@material-ui/core/SvgIcon';
 // import HomeIcon from '@material-ui/icons/Home';
 
 
 const useStyles = makeStyles(theme => ({
-    tab: {
+    Toolbar: {
         // flexGrow: 1,
-        // width: '100%',
-        // backgroundColor: theme.palette.background.paper,
-        background: '#1fc5a9',//'linear-gradient(45deg, #1ff1a9 30%, #1fc5a9 90%)',
+        // width: '80%',
+        backgroundColor: '#192dfe',//'linear-gradient(45deg, #1ff1a9 30%, #1fc5a9 90%)',
         // border: 0,
         // borderRadius: 3,
-        // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
         color: 'white',
-        height: 48,
-        // padding: '0 30px',
+        fontSize: '15px',
+        // height: 40,
+        // padding: '0 px',
     },
+    Tab: {
+      // flex: 4,
+      widith: '90%'
+    },
+    SignButtonGroup: {
+      // flex: 1,
+      backgroundColor: '#192dfe',
+      color: 'white',
+      // width: '10%',
+      // alignItems: 'flex-end'
+      // padding: '0 500px'
+      marginLeft: '65%'
+    }
 }));
 
-const ButtonComponent = styled('button')(({theme}) =>({
-  backgroundColor: '#1fc5a9',
-  color: 'white',
-}));
 
 
 const TopNavBarComponent = (props) => {
     const classes = useStyles();
 
     const [value, setValue] = React.useState(0);
-    const [anchorE1, setAnchorE1] = React.useState(null);
-    const [anchorE2, setAnchorE2] = React.useState(null);
-    const [eventX, setEventX] = React.useState(null);
-    const [eventY, setEventY] = React.useState(null);
+    const [anchorElTab, setAnchorElTab] = React.useState(null);
+    const [anchorElIcon, setAnchorElIcon] = React.useState(null);
     let signButton = [];
 
     function handleTabClick(event) {
         event.stopPropagation();
-        setAnchorE1(event.currentTarget);
+        setAnchorElTab(event.currentTarget);
     }
 
     function handleIconClick(event) {
       event.stopPropagation();
-      setAnchorE2(event.currentTarget);
-      // setEventX(event.clientX);
-      // setEventY(event.clientY);
-      
-  }
-
-    function handleTabClose() {
-        setAnchorE1(null);
+      setAnchorElIcon(event.currentTarget);
     }
 
-    function handleIconClose() {
-      setAnchorE2(null);
-  }
+    function handleTabMenuClose() {
+      setAnchorElTab(null);
+    }
 
+    function handleIconMenuClose(event) {
+      setAnchorElIcon(null);
+      if (event.nativeEvent.target.outerText === 'SignOut') {
+        console.log('signout>>>>>>>>>>>>>>>>>');
+        props.handleSignOut();
+      }
+    }
+    
     function handleChange(event, newValue) {
       console.log('newValue : ' + newValue);
         setValue(newValue);
@@ -78,47 +88,47 @@ const TopNavBarComponent = (props) => {
 
     console.log(props.isLogin);
     if (!props.isLogin) {
-      signButton.push(<Button style={{color: 'white'}} component={Link} to="/SignIn" key="signin">SIGN-IN</Button>);
-      signButton.push(<Button style={{color: 'white'}} component={Link} to="/SignUp" key="signup">SIGN-UP</Button>);
+      signButton.push(<Button style={{color: 'white', fontSize: '15px'}} component={Link} to="/SignIn" key="signin">SIGN-IN</Button>);
+      signButton.push(<Button style={{color: 'white', fontSize: '15px'}} component={Link} to="/SignUp" key="signup">SIGN-UP</Button>);
     } else {
-    // signButton.push(<Button style={{color: 'white', marginLeft: '160%'}} component={Link} to="/SignIn" onClick={props.handleSignOut} key="signout">
-    signButton.push(<Button style={{color: 'white', marginLeft: '160%'}} component={Link} to="/SignIn" onClick={handleIconClick} key="signout">
-      <PersonPinIcon color="action" style={{fontSize: '30'}}/>
+    signButton.push(<Button style={{color: 'white', marginLeft: '160%'}} component={Link} onClick={handleIconClick} key="signout">
+      <PersonPinIcon color="action" style={{fontSize: '40'}}/>
       </Button>);
-      // signButton.push(<Button style={{color: 'white'}} component={Link} to="/SignIn" onClick={props.handleSignOut} key="signout">SIGN-OUT</Button>);
     }
     console.log(props.isLogin);
-    // console.log('styles >>>>>> ' + styles.NavBar);
 
     return (
       <span>
-        <div >
+        <div>
             <AppBar position="static">
-              <Tabs className={styles.Tabs}
+              <Toolbar className={classes.Toolbar}>
+              <Tabs className={classes.Tab}
+                  // className={classes.tab}
                   value={value}
                   onChange={handleChange}
                   // indicatorColor="secondary"
                   // textColor="secondary"
-                  // variant="standard"
-                  // scrollButtons="auto"
+                  variant="standard"
+                  scrollButtons="auto"
                   >
-                      <Tab className={styles.Tabs} label="Home" component={Link} to="/" />
-                      <Tab className={styles.Tabs} label="TP배치스케쥴러" onClick={handleTabClick} />
-                      <Tab className={styles.Tabs} label="정산배치스케쥴러" component={Link} to="/about" />
-                      <div className={styles.SignButtonGroup}>
-                        {signButton}
-                      </div>
+                      <Tab label="Home" component={Link} to="/" />
+                      <Tab label="TP배치스케쥴러" onClick={handleTabClick} />
+                      <Tab label="정산배치스케쥴러" component={Link} to="/about" />
               </Tabs>
+              <div className={classes.SignButtonGroup}>
+                {signButton}
+              </div>
+              </Toolbar>
           </AppBar>
         </div>
         
         <div>
           <Menu
               id="top-nav-bar-menu"
-              anchorEl={anchorE1}
+              anchorEl={anchorElTab}
               keepMounted
-              open={Boolean(anchorE1)}
-              onClose={handleTabClose}
+              open={Boolean(anchorElTab)}
+              onClose={handleTabMenuClose}
               elevation={0}
               getContentAnchorEl={null}
               anchorOrigin={{
@@ -129,18 +139,18 @@ const TopNavBarComponent = (props) => {
                 vertical: 'top',
                 horizontal: 'center',
               }}>
-                  <MenuItem onClick={handleTabClose} component={Link} to="/tables">승인 배치 리스트</MenuItem>
-                  <MenuItem onClick={handleTabClose} component={Link} to="/etc">승인 배치 현황</MenuItem>
-                  <MenuItem onClick={handleTabClose} component={Link} to="/etc">Table3</MenuItem>
+                  <MenuItem onClick={handleTabMenuClose} component={Link} to="/tables">승인 배치 리스트</MenuItem>
+                  <MenuItem onClick={handleTabMenuClose} component={Link} to="/etc">승인 배치 현황</MenuItem>
+                  <MenuItem onClick={handleTabMenuClose} component={Link} to="/etc">Table3</MenuItem>
           </Menu>
           <Menu
               id="top-icon-menu"
-              anchorE1={anchorE2}
+              anchorEl={anchorElIcon}
               keepMounted
-              open={Boolean(anchorE2)}
-              onClose={handleIconClose}
+              open={Boolean(anchorElIcon)}
+              onClose={handleIconMenuClose}
               elevation={0}
-              getContentAnchorE1={null}
+              getContentAnchorEl={null}
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'center',
@@ -149,19 +159,13 @@ const TopNavBarComponent = (props) => {
                 vertical: 'top',
                 horizontal: 'center',
               }}
-              // anchorPosition={{
-              //   left: eventX,
-              //   top: eventY+30
-              //   // right: 150
-              // }}
-              // anchorReference='anchorPosition'
               >
-                  <MenuItem onClick={handleIconClose} component={Link} to="/tables">Settings</MenuItem>
-                  <MenuItem onClick={handleIconClose} component={Link} to="/signin" onClick={props.handleSignOut}>SignOut</MenuItem>
+                  <MenuItem onClick={handleIconMenuClose} component={Link} to="/home">Settings</MenuItem>
+                  <MenuItem onClick={handleIconMenuClose} component={Link} to="/">SignOut</MenuItem>
           </Menu>
         </div>
       </span>
     )
 }
 
-export default TopNavBarComponent;
+export default withRouter(TopNavBarComponent);

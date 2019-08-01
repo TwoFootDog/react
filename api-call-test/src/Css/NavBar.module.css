@@ -12,16 +12,24 @@
     height: 50px;
 }
 
+.Toolbar {
+    background: darkcyan;
+    color: white;
+}
+
+
 .Tabs {
     background: darkcyan;
     color: white;
-    font-weight: bolder;
-    font-family: "Malgun Gothic";
     /* height: 50px; */
 }
 
 .SignButtonGroup {
-    margin-left: 66%;
+    background: darkcyan;
+    color: white;
+    font-weight: bolder;
+    font-family: "Malgun Gothic";
+    margin-left: 65%;
     margin-top: 0.2%;
 }
 
