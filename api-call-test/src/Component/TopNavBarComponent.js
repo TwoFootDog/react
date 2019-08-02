@@ -15,6 +15,7 @@ import styles from '../Css/NavBar.module.css';
 
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import { Toolbar } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 
 // import SvgIcon from '@material-ui/core/SvgIcon';
@@ -29,23 +30,30 @@ const useStyles = makeStyles(theme => ({
         // border: 0,
         // borderRadius: 3,
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-        color: 'white',
-        fontSize: '15px',
+        color: 'white'
         // height: 40,
         // padding: '0 px',
     },
     Tab: {
+      fontSize: '14px'
       // flex: 4,
-      widith: '90%'
+      // widith: '90%'
     },
     SignButtonGroup: {
       // flex: 1,
       backgroundColor: '#192dfe',
       color: 'white',
+      marginTop: '3%'
       // width: '10%',
       // alignItems: 'flex-end'
-      // padding: '0 500px'
-      marginLeft: '65%'
+      // padding: '0 400px'
+      // marginLeft: '50%'
+      // padding: theme.spacing(0)
+    },
+    Menu: {
+        // borderRadius: 10,
+      // backgroundColor: '#192dfe',
+      // color: 'white'
     }
 }));
 
@@ -88,10 +96,10 @@ const TopNavBarComponent = (props) => {
 
     console.log(props.isLogin);
     if (!props.isLogin) {
-      signButton.push(<Button style={{color: 'white', fontSize: '15px'}} component={Link} to="/SignIn" key="signin">SIGN-IN</Button>);
-      signButton.push(<Button style={{color: 'white', fontSize: '15px'}} component={Link} to="/SignUp" key="signup">SIGN-UP</Button>);
+      signButton.push(<Button style={{color: 'white', fontSize: '14px'}} component={Link} to="/SignIn" key="signin">SIGN-IN</Button>);
+      signButton.push(<Button style={{color: 'white', fontSize: '14px'}} component={Link} to="/SignUp" key="signup">SIGN-UP</Button>);
     } else {
-    signButton.push(<Button style={{color: 'white', marginLeft: '160%'}} component={Link} onClick={handleIconClick} key="signout">
+    signButton.push(<Button style={{color: 'white', float: 'right'}} component={Link} onClick={handleIconClick} key="signout">
       <PersonPinIcon color="action" style={{fontSize: '40'}}/>
       </Button>);
     }
@@ -102,7 +110,9 @@ const TopNavBarComponent = (props) => {
         <div>
             <AppBar position="static">
               <Toolbar className={classes.Toolbar}>
-              <Tabs className={classes.Tab}
+                <Grid container>
+                  <Grid item xs={10}>
+              <Tabs
                   // className={classes.tab}
                   value={value}
                   onChange={handleChange}
@@ -111,25 +121,30 @@ const TopNavBarComponent = (props) => {
                   variant="standard"
                   scrollButtons="auto"
                   >
-                      <Tab label="Home" component={Link} to="/" />
-                      <Tab label="TP배치스케쥴러" onClick={handleTabClick} />
-                      <Tab label="정산배치스케쥴러" component={Link} to="/about" />
+                      <Tab className={classes.Tab} label="Home" component={Link} to="/" />
+                      <Tab className={classes.Tab} label="TP배치스케쥴러" onClick={handleTabClick} />
+                      <Tab className={classes.Tab} label="정산배치스케쥴러" component={Link} to="/about" />
               </Tabs>
+              </Grid>
+              <Grid item xs={2}>
               <div className={classes.SignButtonGroup}>
                 {signButton}
               </div>
+              </Grid>
+              </Grid>
               </Toolbar>
           </AppBar>
         </div>
         
         <div>
           <Menu
+              className={classes.Menu}
               id="top-nav-bar-menu"
               anchorEl={anchorElTab}
               keepMounted
               open={Boolean(anchorElTab)}
               onClose={handleTabMenuClose}
-              elevation={0}
+              // elevation={0}
               getContentAnchorEl={null}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -138,7 +153,8 @@ const TopNavBarComponent = (props) => {
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'center',
-              }}>
+              }}
+              >
                   <MenuItem onClick={handleTabMenuClose} component={Link} to="/tables">승인 배치 리스트</MenuItem>
                   <MenuItem onClick={handleTabMenuClose} component={Link} to="/etc">승인 배치 현황</MenuItem>
                   <MenuItem onClick={handleTabMenuClose} component={Link} to="/etc">Table3</MenuItem>
@@ -149,7 +165,7 @@ const TopNavBarComponent = (props) => {
               keepMounted
               open={Boolean(anchorElIcon)}
               onClose={handleIconMenuClose}
-              elevation={0}
+              // elevation={0}
               getContentAnchorEl={null}
               anchorOrigin={{
                 vertical: 'bottom',

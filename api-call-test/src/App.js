@@ -62,9 +62,9 @@ componentDidMount = () => {
     console.log("start>>>>>>>>>>>>>>>>>>>>>>>>");
     return (
       <span>
-        <div className="App">
+        {/* <div className="App">
           <h1>배치 현황판</h1>
-        </div>
+        </div> */}
         <div>
           <TopNavBarComponent isLogin={isLogin} handleSignOut={this.handleSignOut}/>
         </div>
