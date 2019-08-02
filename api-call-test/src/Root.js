@@ -2,10 +2,18 @@ import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
 
-const Root = () => (
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>
-);
+class Root extends React.Component {
+    componentDidMount() {
+        document.title = "Batch Visualizer";
+    }
+    
+    render() {
+        return(
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        )
+    }
+};
 
 export default Root;
