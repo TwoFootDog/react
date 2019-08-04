@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import TopNavBarComponent from './Component/TopNavBarComponent';
+import TopTabComponent from './Component/TopTabComponent';
 import Home from './Layout/Home';
 import TableLayout from './Layout/TableLayout';
 import Etc from './Layout/Etc';
@@ -66,7 +66,7 @@ componentDidMount = () => {
           <h1>배치 현황판</h1>
         </div> */}
         <div>
-          <TopNavBarComponent isLogin={isLogin} handleSignOut={this.handleSignOut}/>
+          <TopTabComponent isLogin={isLogin} handleSignOut={this.handleSignOut}/>
         </div>
         <div align="center">
           <Route exact path="/" render = {() => <Home/>}/>
