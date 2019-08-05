@@ -245,8 +245,8 @@ const TopTabComponent = (props) => {
                 <Grid item sm={10} xs={9}>
                   <Hidden only={['md', 'lg', 'xl']}>
                     {/* <IconButton color="inherit" aria-label="menu" onClick={handleIconTabClick}> */}
-                    {/* <IconButton color="inherit" aria-label="menu" onClick={TpSchedulerLeftMenuRef.current.toggleDrawer('left', true)}> */}
-                    <IconButton color="inherit" aria-label="menu">
+                    <IconButton color="inherit" aria-label="menu" onClick={() => TpSchedulerLeftMenuRef.current.toggleDrawer('left', true)}>
+                    {/* <IconButton color="inherit" aria-label="menu"> */}
                       <MenuIcon />
                     </IconButton>
                   </Hidden>
@@ -348,7 +348,7 @@ const TopTabComponent = (props) => {
                   <MenuItem className={classes.MenuItem}  onClick={handleIconTabMenuClose} component={Link} to="/signin">Sign in</MenuItem>
                   <MenuItem className={classes.MenuItem}  onClick={handleIconTabMenuClose} component={Link} to="/signup">Sign up</MenuItem>
           </Menu>
-          <TpSchedulerLeftMenuComponent side="left" open="true"/>
+          <TpSchedulerLeftMenuComponent side="left" ref={TpSchedulerLeftMenuRef} />
           {/* <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
             {sideList('left')}
           </Drawer> */}

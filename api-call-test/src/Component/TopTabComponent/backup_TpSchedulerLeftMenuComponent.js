@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TpSchedulerLeftMenuComponent = React.forwardRef((props, ref) => {
+const TpSchedulerLeftMenuComponent = (props) => {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -34,16 +34,6 @@ const TpSchedulerLeftMenuComponent = React.forwardRef((props, ref) => {
   });
   const [openCollapse, setOpenCollapse] = React.useState(false);
 
-  function toggleDrawer1(side, open) {
-    console.log('aaa');
-  }
-
-  React.useImperativeHandle(ref, () => ({
-     toggleDrawer(side, open) {
-          setState({...state, [side]: open});
-      }
-
-  }));
   const toggleDrawer = (side, open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
         return;
@@ -98,6 +88,6 @@ const TpSchedulerLeftMenuComponent = React.forwardRef((props, ref) => {
             </Drawer>
           )
           
-});
+}
 
 export default TpSchedulerLeftMenuComponent;
