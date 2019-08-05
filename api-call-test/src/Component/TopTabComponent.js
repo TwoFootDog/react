@@ -1,45 +1,27 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import { makeStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-import { styled } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-// import Typography from '@material-ui/core/Typography'; 
 import { Link } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import styles from '../Css/NavBar.module.css';
-
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import { Toolbar, ListItemIcon, Collapse } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
+import styles from '../Css/NavBar.module.css';
+
+import PersonPinIcon from '@material-ui/icons/PersonPin';
+import Settings from '@material-ui/icons/Settings';
+import InputIcon from '@material-ui/icons/Input';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import ExpandLess from '@material-ui/icons/ExpandLess';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withRouter } from 'react-router-dom';
 import TpSchedulerLeftMenuComponent from './TopTabComponent/TpSchedulerLeftMenuComponent';
 
-import Drawer from '@material-ui/core/Drawer';
-// import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import Dvr from '@material-ui/icons/Dvr';
-import Filter from '@material-ui/icons/Filter';
-import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
-import People from '@material-ui/icons/People';
-import StarBorder from '@material-ui/icons/StarBorder';
-
-// import SvgIcon from '@material-ui/core/SvgIcon';
 
 
 
@@ -67,8 +49,6 @@ const useStyles = makeStyles(theme => ({
       fontSize: '14px',
       fontWeight: theme.typography.fontWeightBold,
       marginTop: theme.spacing(4)
-      // flex: 4,
-      // widith: '90%'
     },
     SignInButton: {
       textTransform: 'none',  
@@ -94,8 +74,6 @@ const useStyles = makeStyles(theme => ({
     HomeIcon: {
       fontSize: '60px',
       color: '#0001fd',
-      // marginLeft: theme.spacing(5),
-      // marginTop: theme.spacing(2)
     },
     MenuItem: {
       color: 'grey',
@@ -119,76 +97,14 @@ const TopTabComponent = (props) => {
     const [anchorElTab, setAnchorElTab] = React.useState(null);
     const [anchorElIcon, setAnchorElIcon] = React.useState(null);
     const [anchorElIconTab, setAnchorElIconTab] = React.useState(null);
+    const [openTabMenu, setOpenTebMenu] = React.useState(false);  // TP스케쥴러 서브메뉴 오픈여부
     let signButton = [];
-
-    // const [state, setState] = React.useState({
-    //   top: false,
-    //   bottom: false,
-    //   left: false,
-    //   right: false
-    // })
-
-    // const [openCollapse, setOpenCollapse] = React.useState(false);
-
-    // const toggleDrawer = (side, open) => event => {
-    //   if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-    //     return;
-    //   }
-    //   setState({...state, [side]: open});
-    //   // console.info('toggleDrawer>>>>>>>' + event.nativeEvent.target.outerText);
-    //   // const router = event.nativeEvent.target.outerText;
-    // }
-
-    // const sideList = side => (
-    //   <div 
-    //       className={classes.list}
-    //       role="presentation"
-    //       //  
-    //       // onKeyDown={toggleDrawer(side, false)}
-    //   >
-    //     <List>
-    //       <ListItem button key={'Home'} component={Link} to="/" onClick={toggleDrawer(side, false)}>
-    //         <ListItemIcon><HomeIcon/></ListItemIcon>Home
-    //       </ListItem>
-    //       <ListItem button key={'TP배치스케쥴러'} onClick={handleListItemClick}>
-    //         <ListItemIcon><Dvr/></ListItemIcon>TP배치스케쥴러
-    //       </ListItem>
-    //       <Collapse in={openCollapse} timeout="auto" unmountOnExit>
-    //         <List component="div" disablePadding>
-    //           <ListItem button className={classes.nested} component={Link} to="/tables" onClick={toggleDrawer(side, false)}>
-    //             <ListItemIcon><StarBorder/></ListItemIcon>
-    //             <ListItemText primary="승인배치리스트"/>
-    //           </ListItem>
-    //           <ListItem button className={classes.nested} component={Link} to="/etc" onClick={toggleDrawer(side, false)}>
-    //             <ListItemIcon><StarBorder/></ListItemIcon>
-    //             <ListItemText primary="승인배치현황"/>
-    //           </ListItem>
-    //           <ListItem button className={classes.nested} component={Link} to="/etc" onClick={toggleDrawer(side, false)}>
-    //             <ListItemIcon><StarBorder/></ListItemIcon>
-    //             <ListItemText primary="Table3"/>
-    //           </ListItem>
-    //         </List>
-    //       </Collapse>
-    //       <ListItem button key={'정산스케쥴러'} component={Link} to="/about" onClick={toggleDrawer(side, false)}>
-    //         <ListItemIcon><Filter/></ListItemIcon>정산스케쥴러
-    //       </ListItem>
-    //     </List>
-    //     <Divider />
-    //     <List>
-    //       {['Sign in', 'Sign up'].map((text, index) => (
-    //         <ListItem button key={text} component={Link} to={text === 'Sign in' ? '/signin' : '/signup'} onClick={toggleDrawer(side, false)}>
-    //           <ListItemIcon>{text === 'Sign in' ? <PersonPinIcon/> : <People/>}</ListItemIcon>
-    //           <ListItemText primary={text}/>
-    //         </ListItem>
-    //       ))}
-    //     </List>
-    //   </div>
-    // )
 
 
     function handleTabClick(event) {
         event.stopPropagation();
         setAnchorElTab(event.currentTarget);
+        setOpenTebMenu(!openTabMenu); 
     }
 
     function handleIconClick(event) {
@@ -203,6 +119,7 @@ const TopTabComponent = (props) => {
 
     function handleTabMenuClose() {
       setAnchorElTab(null);
+      setOpenTebMenu(false);
     }
 
     function handleIconMenuClose(event) {
@@ -217,9 +134,6 @@ const TopTabComponent = (props) => {
       setAnchorElIconTab(null);
     }
 
-    // function handleListItemClick() {
-    //   setOpenCollapse(!openCollapse);
-    // }
     
     function handleChange(event, newValue) {
       console.log('newValue : ' + newValue);
@@ -266,7 +180,7 @@ const TopTabComponent = (props) => {
                         variant="standard"
                         scrollButtons="auto"
                         >
-                            <Tab className={classes.Tab} label={<><div>TP배치스케쥴러<ExpandMore/></div></>} onClick={handleTabClick}/> 
+                            <Tab className={classes.Tab} label={<><div>TP배치스케쥴러{openTabMenu?<ExpandLess/>:<ExpandMore/>}</div></>} onClick={handleTabClick}/> 
                             <Tab className={classes.Tab} label="정산배치스케쥴러" component={Link} to="/about" />
                             <Tab className={classes.Tab} label="About Visualizer" component={Link} to="/about" />
                     </Tabs>
@@ -282,8 +196,6 @@ const TopTabComponent = (props) => {
               </Grid>
           </AppBar>
         </div>
-        
-        <div>
           <Menu
               className={classes.Menu}
               id="top-nav-bar-menu"
@@ -322,37 +234,10 @@ const TopTabComponent = (props) => {
                 vertical: 'top',
                 horizontal: 'center',
               }}>
-                  <MenuItem className={classes.MenuItem} onClick={handleIconMenuClose} component={Link} to="/home">Settings</MenuItem>
-                  <MenuItem className={classes.MenuItem} onClick={handleIconMenuClose} component={Link} to="/">Sign out</MenuItem>
-          </Menu>
-          <Menu
-              id="icon-nav-bar-menu"
-              anchorEl={anchorElIconTab}
-              keepMounted
-              open={Boolean(anchorElIconTab)}
-              onClose={handleIconTabMenuClose}
-              // elevation={0}
-              getContentAnchorEl={null}             
-              anchorOrigin={{
-                // vertical: 'bottom',
-                // horizontal: 'center',
-              }}
-              transformOrigin={{
-                // vertical: 'top',
-                // horizontal: 'center',
-              }}
-              >
-                  <MenuItem className={classes.MenuItem} onClick={handleIconTabMenuClose} component={Link} to="/">Home</MenuItem>
-                  <MenuItem className={classes.MenuItem}  onClick={handleIconTabMenuClose} component={Link} to="/etc">TP배치스케쥴러</MenuItem>
-                  <MenuItem className={classes.MenuItem}  onClick={handleIconTabMenuClose} component={Link} to="/about">정산배치스케쥴러</MenuItem>
-                  <MenuItem className={classes.MenuItem}  onClick={handleIconTabMenuClose} component={Link} to="/signin">Sign in</MenuItem>
-                  <MenuItem className={classes.MenuItem}  onClick={handleIconTabMenuClose} component={Link} to="/signup">Sign up</MenuItem>
+                  <MenuItem className={classes.MenuItem} onClick={handleIconMenuClose} component={Link} to="/home"><Settings style={{marginRight:'10px'}}/>Settings</MenuItem>
+                  <MenuItem className={classes.MenuItem} onClick={handleIconMenuClose} component={Link} to="/"><InputIcon style={{marginRight:'10px'}}/>Sign out</MenuItem>
           </Menu>
           <TpSchedulerLeftMenuComponent side="left" ref={TpSchedulerLeftMenuRef} />
-          {/* <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-            {sideList('left')}
-          </Drawer> */}
-        </div>
       </span>
     )
 }
