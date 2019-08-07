@@ -20,7 +20,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withRouter } from 'react-router-dom';
-import TpSchedulerLeftMenuComponent from './TopTabComponent/TpSchedulerLeftMenuComponent';
+import LeftTpSchedulerDropMenuComponent from './TopTabComponent/LeftTpSchedulerDropMenuComponent';
+import TopRightPersonIconDropMenuComponent from './TopTabComponent/TopRightPersonIconDropMenuComponent';
 
 
 
@@ -91,12 +92,11 @@ const useStyles = makeStyles(theme => ({
 
 const TopTabComponent = (props) => {
     const classes = useStyles();
-    const TpSchedulerLeftMenuRef = React.useRef();
+    const LeftTpSchedulerDropMenuRef = React.useRef();    // 왼쪽 TP스케쥴러 버튼 클릭시 나오는 drop menu component를 참조하는 변수
+    const TopRightPersonIconDropMenuRef = React.useRef(); // 상단 오른쪽 로그인한 사용자 아이콘 클릭시 나오는 drop menu component를 참조하는 변수
 
     const [value, setValue] = React.useState(0);
     const [anchorElTab, setAnchorElTab] = React.useState(null);
-    const [anchorElIcon, setAnchorElIcon] = React.useState(null);
-    const [anchorElIconTab, setAnchorElIconTab] = React.useState(null);
     const [openTabMenu, setOpenTebMenu] = React.useState(false);  // TP스케쥴러 서브메뉴 오픈여부
     let signButton = [];
 
@@ -107,33 +107,10 @@ const TopTabComponent = (props) => {
         setOpenTebMenu(!openTabMenu); 
     }
 
-    function handleIconClick(event) {
-      event.stopPropagation();
-      setAnchorElIcon(event.currentTarget);
-    }
-
-    function handleIconTabClick(event) {
-      event.stopPropagation();
-      setAnchorElIconTab(event.currentTarget);
-    }
-
     function handleTabMenuClose() {
       setAnchorElTab(null);
       setOpenTebMenu(false);
     }
-
-    function handleIconMenuClose(event) {
-      setAnchorElIcon(null);
-      if (event.nativeEvent.target.outerText === 'Sign out') {
-        console.log('signout>>>>>>>>>>>>>>>>>');
-        props.handleSignOut();
-      }
-    }
-
-    function handleIconTabMenuClose() {
-      setAnchorElIconTab(null);
-    }
-
     
     function handleChange(event, newValue) {
       console.log('newValue : ' + newValue);
@@ -145,7 +122,8 @@ const TopTabComponent = (props) => {
       signButton.push(<Button className={classes.SignInButton} component={Link} to="/SignIn" key="signin">Sign in</Button>);
       signButton.push(<Hidden only={['xs', 'sm']}><Button className={classes.SignUpButton} component={Link} to="/SignUp" key="signup">Sign up</Button></Hidden>);
     } else {
-    signButton.push(<Button className={classes.SignIcon} component={Link} onClick={handleIconClick} key="signout">
+    signButton.push(<Button className={classes.SignIcon} component={Link} onClick={(event) => TopRightPersonIconDropMenuRef.current.handleIconClick(event)} key="signout">
+      {/* signButton.push(<Button className={classes.SignIcon} component={Link} onClick={handleIconClick} key="signout"></Button> */}
       <PersonPinIcon color="action" style={{fontSize: '40'}}/>
       </Button>);
     }
@@ -158,9 +136,7 @@ const TopTabComponent = (props) => {
               <Grid container>
                 <Grid item sm={10} xs={9}>
                   <Hidden only={['md', 'lg', 'xl']}>
-                    {/* <IconButton color="inherit" aria-label="menu" onClick={handleIconTabClick}> */}
-                    <IconButton color="inherit" aria-label="menu" onClick={() => TpSchedulerLeftMenuRef.current.toggleDrawer('left', true)}>
-                    {/* <IconButton color="inherit" aria-label="menu"> */}
+                    <IconButton color="inherit" aria-label="menu" onClick={() => LeftTpSchedulerDropMenuRef.current.toggleDrawer('left', true)}>
                       <MenuIcon />
                     </IconButton>
                   </Hidden>
@@ -218,26 +194,8 @@ const TopTabComponent = (props) => {
                   <MenuItem className={classes.MenuItem} onClick={handleTabMenuClose} component={Link} to="/etc">승인 배치 현황</MenuItem>
                   <MenuItem className={classes.MenuItem} onClick={handleTabMenuClose} component={Link} to="/etc">Table3</MenuItem>
           </Menu>
-          <Menu
-              id="top-icon-menu"
-              anchorEl={anchorElIcon}
-              keepMounted
-              open={Boolean(anchorElIcon)}
-              onClose={handleIconMenuClose}
-              // elevation={0}
-              getContentAnchorEl={null}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}>
-                  <MenuItem className={classes.MenuItem} onClick={handleIconMenuClose} component={Link} to="/home"><Settings style={{marginRight:'10px'}}/>Settings</MenuItem>
-                  <MenuItem className={classes.MenuItem} onClick={handleIconMenuClose} component={Link} to="/"><InputIcon style={{marginRight:'10px'}}/>Sign out</MenuItem>
-          </Menu>
-          <TpSchedulerLeftMenuComponent side="left" ref={TpSchedulerLeftMenuRef} />
+          <TopRightPersonIconDropMenuComponent handleSignOut={props.handleSignOut} ref={TopRightPersonIconDropMenuRef} />
+          <LeftTpSchedulerDropMenuComponent side="left" ref={LeftTpSchedulerDropMenuRef} />
       </span>
     )
 }

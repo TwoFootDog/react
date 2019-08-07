@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const batchListUrl = "http://198.13.47.188:8080/batch";
+const batchListUrl = "http://198.13.47.188:8080/tp";
 const signInUrl = "http://127.0.0.1:8080/signin";
 const signUpUrl = "http://127.0.0.1:8080/signup";
 const getUserInfoUrl = "http://127.0.0.1:8080/getUserInfo"

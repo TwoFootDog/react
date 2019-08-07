@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 /* function component */
-const TpSchedulerLeftMenuComponent = React.forwardRef((props, ref) => {
+const LeftTpSchedulerDropMenuComponent = React.forwardRef((props, ref) => {
   const classes = useStyles();  // use component style
 
   const [state, setState] = React.useState({  // state value & set function
@@ -56,9 +56,9 @@ const TpSchedulerLeftMenuComponent = React.forwardRef((props, ref) => {
 
   // left Drawer menu event function(side는 left만 가능. open이 true이면 drawer menu open, false이면 drawer menu close)
   const toggleDrawer = (side, open) => event => {
-    // if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-    //     return;
-    //   }
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        return;
+      }
         setState({...state, [side]: open});
   }
 
@@ -67,7 +67,6 @@ const TpSchedulerLeftMenuComponent = React.forwardRef((props, ref) => {
     setOpenCollapse(!openCollapse);
   }
         
-  // label={<><div>TP배치스케쥴러<ExpandMore/></div></>} 
     return (
         <Drawer open={state.left} onClose={toggleDrawer(props.side, false)}>
             <div className={classes.list} role="presentation">
@@ -125,4 +124,4 @@ const TpSchedulerLeftMenuComponent = React.forwardRef((props, ref) => {
           
 });
 
-export default TpSchedulerLeftMenuComponent;
+export default LeftTpSchedulerDropMenuComponent;
