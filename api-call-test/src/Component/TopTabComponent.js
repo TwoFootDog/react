@@ -4,17 +4,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Link } from 'react-router-dom';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import styles from '../Css/NavBar.module.css';
 
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import Settings from '@material-ui/icons/Settings';
-import InputIcon from '@material-ui/icons/Input';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import HomeIcon from '@material-ui/icons/Home';
@@ -22,6 +16,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { withRouter } from 'react-router-dom';
 import LeftTpSchedulerDropMenuComponent from './TopTabComponent/LeftTpSchedulerDropMenuComponent';
 import TopRightPersonIconDropMenuComponent from './TopTabComponent/TopRightPersonIconDropMenuComponent';
+import TopTpSchedulerDropMenuComponent from './TopTabComponent/TopTpSchedulerDropMenuComponent';
+import TopRightSignButtonComponent from './TopTabComponent/TopRightSignButtonComponent';
 
 
 
@@ -51,41 +47,10 @@ const useStyles = makeStyles(theme => ({
       fontWeight: theme.typography.fontWeightBold,
       marginTop: theme.spacing(4)
     },
-    SignInButton: {
-      textTransform: 'none',  
-      backgroundColor: '#0171ff',
-      color: 'white', 
-      fontSize: '14px',
-      fontWeight: theme.typography.fontWeightBold,
-      marginTop: theme.spacing(1)
-    },
-    SignUpButton: {
-      textTransform: 'none',
-      backgroundColor: '#21afff',
-      color: '#192dfe', 
-      fontSize: '14px',
-      fontWeight: theme.typography.fontWeightBold,
-      marginLeft: theme.spacing(1),
-      marginTop: theme.spacing(1)
-    },
-    SignIcon: {
-      float: 'right',
-      marginTop: '2%'
-    },
     HomeIcon: {
       fontSize: '60px',
       color: '#0001fd',
     },
-    MenuItem: {
-      color: 'grey',
-      fontWeight: theme.typography.fontWeightBold
-    },
-    list: {
-      width: 250
-    },
-    nested: {
-      paddingLeft: theme.spacing(4)
-    }
 }));
 
 
@@ -94,40 +59,23 @@ const TopTabComponent = (props) => {
     const classes = useStyles();
     const LeftTpSchedulerDropMenuRef = React.useRef();    // 왼쪽 TP스케쥴러 버튼 클릭시 나오는 drop menu component를 참조하는 변수
     const TopRightPersonIconDropMenuRef = React.useRef(); // 상단 오른쪽 로그인한 사용자 아이콘 클릭시 나오는 drop menu component를 참조하는 변수
+    const TopTpSchulerDropMenuRef = React.useRef();
 
     const [value, setValue] = React.useState(0);
-    const [anchorElTab, setAnchorElTab] = React.useState(null);
-    const [openTabMenu, setOpenTebMenu] = React.useState(false);  // TP스케쥴러 서브메뉴 오픈여부
-    let signButton = [];
+    const [openTabMenu, setOpenTebMenu] = React.useState(false);
 
-
-    function handleTabClick(event) {
-        event.stopPropagation();
-        setAnchorElTab(event.currentTarget);
-        setOpenTebMenu(!openTabMenu); 
+    function handleOpenTabMenu() {
+      setOpenTebMenu(!openTabMenu);
     }
-
-    function handleTabMenuClose() {
-      setAnchorElTab(null);
-      setOpenTebMenu(false);
+    
+    function handleTopRightPersonIcon(event) {
+      TopRightPersonIconDropMenuRef.current.handleIconClick(event);
     }
     
     function handleChange(event, newValue) {
       console.log('newValue : ' + newValue);
-        setValue(newValue);
+      setValue(newValue);
     }
-
-    console.log(props.isLogin);
-    if (!props.isLogin) {
-      signButton.push(<Button className={classes.SignInButton} component={Link} to="/SignIn" key="signin">Sign in</Button>);
-      signButton.push(<Hidden only={['xs', 'sm']}><Button className={classes.SignUpButton} component={Link} to="/SignUp" key="signup">Sign up</Button></Hidden>);
-    } else {
-    signButton.push(<Button className={classes.SignIcon} component={Link} onClick={(event) => TopRightPersonIconDropMenuRef.current.handleIconClick(event)} key="signout">
-      {/* signButton.push(<Button className={classes.SignIcon} component={Link} onClick={handleIconClick} key="signout"></Button> */}
-      <PersonPinIcon color="action" style={{fontSize: '40'}}/>
-      </Button>);
-    }
-    console.log(props.isLogin);
 
     return (
       <span>
@@ -156,7 +104,8 @@ const TopTabComponent = (props) => {
                         variant="standard"
                         scrollButtons="auto"
                         >
-                            <Tab className={classes.Tab} label={<><div>TP배치스케쥴러{openTabMenu?<ExpandLess/>:<ExpandMore/>}</div></>} onClick={handleTabClick}/> 
+                            <Tab className={classes.Tab} label={<><div>TP배치스케쥴러{openTabMenu?<ExpandLess/>:<ExpandMore/>}</div></>} 
+                            onClick={(event) => TopTpSchulerDropMenuRef.current.handleTabClick(event)}/> 
                             <Tab className={classes.Tab} label="정산배치스케쥴러" component={Link} to="/about" />
                             <Tab className={classes.Tab} label="About Visualizer" component={Link} to="/about" />
                     </Tabs>
@@ -166,34 +115,13 @@ const TopTabComponent = (props) => {
                 </Grid>
                 <Grid item sm={2} xs={3}>
                   <div>
-                    {signButton}
+                    <TopRightSignButtonComponent isLogin={props.isLogin} handleTopRightPersonIcon={handleTopRightPersonIcon}/>
                   </div>
                 </Grid>
               </Grid>
           </AppBar>
         </div>
-          <Menu
-              className={classes.Menu}
-              id="top-nav-bar-menu"
-              anchorEl={anchorElTab}
-              keepMounted
-              open={Boolean(anchorElTab)}
-              onClose={handleTabMenuClose}
-              // elevation={0}
-              getContentAnchorEl={null}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-              >
-                  <MenuItem className={classes.MenuItem} onClick={handleTabMenuClose} component={Link} to="/tables">승인 배치 리스트</MenuItem>
-                  <MenuItem className={classes.MenuItem} onClick={handleTabMenuClose} component={Link} to="/etc">승인 배치 현황</MenuItem>
-                  <MenuItem className={classes.MenuItem} onClick={handleTabMenuClose} component={Link} to="/etc">Table3</MenuItem>
-          </Menu>
+          <TopTpSchedulerDropMenuComponent handleOpenTabMenu={handleOpenTabMenu} ref={TopTpSchulerDropMenuRef} />
           <TopRightPersonIconDropMenuComponent handleSignOut={props.handleSignOut} ref={TopRightPersonIconDropMenuRef} />
           <LeftTpSchedulerDropMenuComponent side="left" ref={LeftTpSchedulerDropMenuRef} />
       </span>
