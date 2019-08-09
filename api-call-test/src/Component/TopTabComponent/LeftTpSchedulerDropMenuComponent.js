@@ -19,6 +19,7 @@ import Filter from '@material-ui/icons/Filter';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
+import HomeIconImg from '../../image/HomeIcon.svg'
 
 
 /* component style */
@@ -73,7 +74,10 @@ const LeftTpSchedulerDropMenuComponent = React.forwardRef((props, ref) => {
               <List>
               <IconButton className={classes.menuIcon} color="inherit" aria-label="menu" onClick={toggleDrawer(props.side, false)}>
                 <MenuIcon />
-              </IconButton><Button size="small" className={classes.menuTextButton} component={Link} to="/" onClick={toggleDrawer(props.side, false)}>Batch Visualizer</Button>
+              </IconButton>
+                <Button size="small" className={classes.menuTextButton} component={Link} to="/" onClick={toggleDrawer(props.side, false)}>
+                  <img src={HomeIconImg} width="25" height="20" style={{marginLeft: '-20px'}}/>Batch Visualizer
+                </Button>
               </List>
               <Divider />
               <List aria-labelledby="nested-list-subheader" 

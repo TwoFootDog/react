@@ -19,11 +19,13 @@ import * as RestApi from '../Common/RestApi';
 const useStyles = theme => ({
   '@global': {
     body: {
-      backgroundColor: theme.palette.common.white,
+      backgroundColor: '#e6e6e6',
     },
   },
   paper: {
+    backgroundColor: 'white',
     marginTop: theme.spacing(20),
+    padding: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
