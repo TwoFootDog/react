@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     },
     thirdContainer: {
         flexGrow: 1,
-        backgroundColor: '#969696',
+        backgroundColor: '#323232',
         // height: '300px',
         // width: '80%',
         marginTop: theme.spacing(20),
