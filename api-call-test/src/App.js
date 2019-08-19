@@ -10,8 +10,15 @@ import SignUp from './Layout/SignUp';
 // import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
+import { withStyles } from '@material-ui/core/styles';
 import * as RestApi from './Common/RestApi';
 import Welcome from './Layout/Welcome';
+
+const useStyles = theme => ({
+  TopTab: {
+    height: 74
+  }
+})
 
 class App extends React.Component {
   state = {
@@ -58,14 +65,16 @@ componentDidMount = () => {
     // 컴포넌트가 화면에 나타나게 됐을 때 호출됨
 }
   render() {
+    const { classes } = this.props;
     const { isLogin } = this.state;
+    
     console.log("start>>>>>>>>>>>>>>>>>>>>>>>>");
     return (
       <span>
         {/* <div className="App">
           <h1>배치 현황판</h1>
         </div> */}
-        <div>
+        <div className={classes.TopTab}>
           <TopTabComponent isLogin={isLogin} handleSignOut={this.handleSignOut}/>
         </div>
         <div align="center">
@@ -89,4 +98,4 @@ componentDidMount = () => {
   }
 }
 
-export default App;
+export default withStyles(useStyles)(App);

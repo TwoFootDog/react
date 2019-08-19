@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
         // borderRadius: 3,
         // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
         color: 'white',
-        height: 85,
+        //height: 85,
         position: 'fixed',
         top: 0
         // padding: '0 px',

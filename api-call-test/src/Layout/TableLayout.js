@@ -41,9 +41,12 @@ class TableLayout extends React.Component {
   
     return(
       <div>
-        <TableSelectButtonComponent onClick={this.TableButtonClick}/>
+        <div>배치프로그램 리스트</div>
+        {/* <TableSelectButtonComponent onClick={this.TableButtonClick}/> */}
         {/* {TableComponent()} */}
-        <TableComponent />
+        {/* <TableComponent /> */}
+        <MaterialTableComponent/>
+        {/* <BootStrapTableComponent/> */}
       </div>
     );
   }

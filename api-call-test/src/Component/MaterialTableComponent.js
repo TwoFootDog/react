@@ -49,6 +49,11 @@ class MaterialTableComponent extends React.Component {
     constructor(props) {
         super(props);
         this.fetchBatchList();
+        console.log("constructor call>>>>>>>>>>>>>>>>>>>>>" );
+    }
+    
+    componentDidMount () {
+        // this.fetchBatchList();
     }
 
     // 배치 전체 리스트를 호출하는 API를 호출하는 함수
@@ -69,19 +74,23 @@ class MaterialTableComponent extends React.Component {
         // 테이블의 column이 아닌 data 부분을 그려주는 함수
         const tableBody = () => {
             let tableData;
+            // const response = await RESTAPI.getBatchList();
+            // this.fetchBatchList();
             // response가 null이 아닌 경우만 테이블을 그려줌(null인 경우엔 map 함수가 정상 동작하지 않음)
+            console.log("response111>>>>>>>>>>>>>>>>>>>>>" + JSON.stringify(this.state.response));
             if (this.state.response != null) {
-                tableData = this.state.response.data.batchProgram;
+                tableData = this.state.response.data.batchJobs;
+                console.log("response222>>>>>>>>>>>>>>>>>>>>>" + this.state.response.data.batchJobs)
                 return (
                     tableData.map(data => (
-                        <StyledTableRow hover onClick={event => this.handleClick(event, data)} key={data.batchProgramId.batchSeq}>
-                            <StyledTableCell component="th" scope="row">{data.batchProgramId.systemId}</StyledTableCell>    
-                            <StyledTableCell align="right">{data.batchProgramId.batchSeq}</StyledTableCell>
-                            <StyledTableCell align="right">{data.batchProgramId.batchProcId}</StyledTableCell>
-                            <StyledTableCell align="right">{data.batchKoreanName}</StyledTableCell>
-                            <StyledTableCell align="right">{data.hasInputFile}</StyledTableCell>
-                            <StyledTableCell align="right">{data.fileId}</StyledTableCell>
-                            <StyledTableCell align="right">{data.sendResultFile}</StyledTableCell>
+                        <StyledTableRow hover onClick={event => this.handleClick(event, data)} key={data.batchFile.fileId}>
+                            <StyledTableCell component="th" scope="row">{data.batchJobId.masterBatchId}</StyledTableCell>    
+                            <StyledTableCell align="right">{data.masterBatchName}</StyledTableCell>
+                            <StyledTableCell align="right">{data.hostname}</StyledTableCell>
+                            <StyledTableCell align="right">{data.inputFileYn}</StyledTableCell>
+                            <StyledTableCell align="right">{data.batchFile.fileId}</StyledTableCell>
+                            <StyledTableCell align="right">{data.batchFile.fileName}</StyledTableCell>
+                            <StyledTableCell align="right">{data.preBatchExistYn}</StyledTableCell>
                         </StyledTableRow>
                         // <TableRow hover key={data.batchProgramId.batchSeq}>
                         //     <TableCell component="th" scope="row">{data.batchProgramId.systemId}</TableCell>    
@@ -107,12 +116,12 @@ class MaterialTableComponent extends React.Component {
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>배치프로그램시스템ID</StyledTableCell>
-                                <StyledTableCell align='right'>배치순번</StyledTableCell>
-                                <StyledTableCell align='right'>배치프로세스ID</StyledTableCell>
-                                <StyledTableCell align='right'>배치한글명</StyledTableCell>
-                                <StyledTableCell align='right'>파일존재구분</StyledTableCell>
-                                <StyledTableCell align='right'>파일ID</StyledTableCell>
-                                <StyledTableCell align='right'>결과파일전송구분</StyledTableCell>
+                                <StyledTableCell align='right'>배치프로그램한글명</StyledTableCell>
+                                <StyledTableCell align='right'>호스트명</StyledTableCell>
+                                <StyledTableCell align='right'>파일유입여부</StyledTableCell>
+                                <StyledTableCell align='right'>배치파일ID</StyledTableCell>
+                                <StyledTableCell align='right'>배치파일명</StyledTableCell>
+                                <StyledTableCell align='right'>사전배치존재여부</StyledTableCell>
                                 {/* <TableCell>배치프로그램시스템ID</TableCell>
                                 <TableCell align='right'>배치순번</TableCell>
                                 <TableCell align='right'>배치프로세스ID</TableCell>

@@ -31,7 +31,7 @@ class BootStrapTableComponent extends React.Component {
         const tableBody = () => {
             let tableData = [];
             if (this.state.response != null) {
-                tableData = this.state.response.data.batchProgram;
+                tableData = this.state.response.data.batchJobs;
                 return (
                     tableData.map((data, index) => (
                         <tr key={index} onClick={event => this.handleClick(event, data)}>
