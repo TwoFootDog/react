@@ -4,6 +4,15 @@ import ReactTableComponent from '../Component/ReactTableComponent';
 import MaterialTableComponent from '../Component/MaterialTableComponent';
 import BootStrapTableComponent from '../Component/BootStrapTableComponent';
 import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+
+const useStyles = theme => ({
+  TopComment: {
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
+    fontSize: '40px'
+  }
+})
 
 class TableLayout extends React.Component {
   state = {
@@ -17,6 +26,8 @@ class TableLayout extends React.Component {
   }
 
   render() {
+    const {classes} = this.props;
+
     if (!this.props.isLogin) {
       console.log("not signin");
       this.props.history.push('/signin');
@@ -41,7 +52,7 @@ class TableLayout extends React.Component {
   
     return(
       <div>
-        <div>배치프로그램 리스트</div>
+        <div className={classes.TopComment}>배치프로그램 목록</div>
         {/* <TableSelectButtonComponent onClick={this.TableButtonClick}/> */}
         {/* {TableComponent()} */}
         {/* <TableComponent /> */}
@@ -52,4 +63,4 @@ class TableLayout extends React.Component {
   }
 }
 
-export default withRouter(TableLayout);
+export default withStyles(useStyles)(withRouter(TableLayout));

@@ -12,12 +12,13 @@ import * as RESTAPI from '../Common/RestApi';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: 'black',
         color: theme.palette.common.white,
-        fontSize: 15,
+        // fontSize: 12,
+        // height: 1
     },
     body: {
-        fontSize: 14,
+        // fontSize: 12,
     },
 }))(TableCell);
 
@@ -29,17 +30,17 @@ const StyledTableRow = withStyles(theme => ({
     },
 }))(TableRow);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = theme => ({
     root: {
         width: '100%',
-        marginTop: theme.spacing(3),
-        overflowX: 'auto',
+        // marginTop: theme.spacing(10),
+        // overflowX: 'auto',
     },
     table: {
         // width:'50%',
-        minWidth: 700,
+        minWidth: 2500,
     },
-}));
+});
 
 class MaterialTableComponent extends React.Component {
     state = {
@@ -71,6 +72,8 @@ class MaterialTableComponent extends React.Component {
     }
 
     render() {
+        const {classes} = this.props;
+
         // 테이블의 column이 아닌 data 부분을 그려주는 함수
         const tableBody = () => {
             let tableData;
@@ -91,6 +94,14 @@ class MaterialTableComponent extends React.Component {
                             <StyledTableCell align="right">{data.batchFile.fileId}</StyledTableCell>
                             <StyledTableCell align="right">{data.batchFile.fileName}</StyledTableCell>
                             <StyledTableCell align="right">{data.preBatchExistYn}</StyledTableCell>
+                            <StyledTableCell align="right">{data.fileAutoSendYn}</StyledTableCell>
+                            <StyledTableCell align="right">{data.multiProcessCount}</StyledTableCell>
+                            <StyledTableCell align="right">{data.reportType}</StyledTableCell>
+                            <StyledTableCell align="right">{data.applyYn}</StyledTableCell>
+                            <StyledTableCell align="right">{data.registerId}</StyledTableCell>
+                            <StyledTableCell align="right">{data.registerDate}</StyledTableCell>
+                            <StyledTableCell align="right">{data.updaterId}</StyledTableCell>
+                            <StyledTableCell align="right">{data.updateDate}</StyledTableCell>
                         </StyledTableRow>
                         // <TableRow hover key={data.batchProgramId.batchSeq}>
                         //     <TableCell component="th" scope="row">{data.batchProgramId.systemId}</TableCell>    
@@ -110,18 +121,26 @@ class MaterialTableComponent extends React.Component {
 
         return(
             // 테이블의 column과 data부분을 그려줌
-            <div className={useStyles.root}>
+            <div className={classes.root}>
                 {/* <Paper className={useStyles.paper}> */}
-                    <Table className={useStyles.table} style={{width:'80rem'}}>
+                    <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>배치프로그램시스템ID</StyledTableCell>
-                                <StyledTableCell align='right'>배치프로그램한글명</StyledTableCell>
+                                <StyledTableCell align='center'>배치프로그램한글명</StyledTableCell>
                                 <StyledTableCell align='right'>호스트명</StyledTableCell>
                                 <StyledTableCell align='right'>파일유입여부</StyledTableCell>
                                 <StyledTableCell align='right'>배치파일ID</StyledTableCell>
                                 <StyledTableCell align='right'>배치파일명</StyledTableCell>
                                 <StyledTableCell align='right'>사전배치존재여부</StyledTableCell>
+                                <StyledTableCell align='right'>파일자동전송여부</StyledTableCell>
+                                <StyledTableCell align='right'>동시수행최대개수</StyledTableCell>
+                                <StyledTableCell align='right'>파일결과타입</StyledTableCell>
+                                <StyledTableCell align='right'>적용여부</StyledTableCell>
+                                <StyledTableCell align='right'>등록자ID</StyledTableCell>
+                                <StyledTableCell align='right'>등록일자</StyledTableCell>
+                                <StyledTableCell align='right'>변경자ID</StyledTableCell>
+                                <StyledTableCell align='right'>변경일자</StyledTableCell>
                                 {/* <TableCell>배치프로그램시스템ID</TableCell>
                                 <TableCell align='right'>배치순번</TableCell>
                                 <TableCell align='right'>배치프로세스ID</TableCell>
@@ -141,4 +160,4 @@ class MaterialTableComponent extends React.Component {
     }
 }
 
-export default MaterialTableComponent;
+export default withStyles(useStyles)(MaterialTableComponent);
