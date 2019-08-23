@@ -13,6 +13,7 @@ import './App.css';
 import { withStyles } from '@material-ui/core/styles';
 import * as RestApi from './Common/RestApi';
 import Welcome from './Layout/Welcome';
+import BatchDetail from './Layout/BatchDetail';
 
 const useStyles = theme => ({
   TopTab: {
@@ -80,6 +81,7 @@ componentDidMount = () => {
         <div align="center">
           <Route exact path="/" render = {() => <Home/>}/>
           <Route path="/tables" render = {() => <TableLayout isLogin={isLogin}/>}/>
+          <Route path="/batchDetail/masterBatchId/:masterBatchId" render = {(props) => <BatchDetail isLogin={isLogin} masterBatchId={props.location.state.masterBatchId}/>}/>
           <Route path="/etc" render = {() => <Etc isLogin={isLogin}/>}/>
           <Route path="/about" render = {() => <About isLogin={isLogin}/>}/>
           <Route path="/signin" render = {() => <SignIn isLogin={isLogin} handleUserInfo={this.handleUserInfo}/>}/>

@@ -69,6 +69,7 @@ class MaterialTableComponent extends React.Component {
     handleClick = (event, data) => {
         console.log("event" + event);
         console.log("row" + data);
+        this.props.handleTableRowClick(data.batchJobId.masterBatchId);
     }
 
     render() {

@@ -25,6 +25,21 @@ class TableLayout extends React.Component {
     });
   }
 
+  handleTableRowClick = (masterBatchId) => {
+    console.log('masterBatchId>>>>>>>>>>>>>'+ masterBatchId);
+        this.props.history.push({
+      pathname: `/batchDetail/masterBatchId/${masterBatchId}`,
+      state: { masterBatchId: masterBatchId }
+    });
+    // this.props.history.push(`/batchDetail/masterBatchId/${masterBatchId}`);
+    // this.props.history.push('/batchDetail');
+    // this.props.history.push({
+    //   pathname: '/batchDetail',
+    //   search: '/masterBatchId/' + masterBatchId,
+    //   state: { masterBatchId: masterBatchId }
+    // });
+  }
+
   render() {
     const {classes} = this.props;
 
@@ -56,7 +71,7 @@ class TableLayout extends React.Component {
         {/* <TableSelectButtonComponent onClick={this.TableButtonClick}/> */}
         {/* {TableComponent()} */}
         {/* <TableComponent /> */}
-        <MaterialTableComponent/>
+        <MaterialTableComponent handleTableRowClick={this.handleTableRowClick}/>
         {/* <BootStrapTableComponent/> */}
       </div>
     );

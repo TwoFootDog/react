@@ -10,6 +10,12 @@ export const getBatchList = () => {
     return axios.get(batchListUrl);
 }
 
+// 배치 상세정보 호출 API
+export const getBatchDetailInfo = (masterBatchId) => {
+    const url = batchListUrl + '/' + masterBatchId
+    return axios.get(url);
+}
+
 // 로그인 API
 export const signIn = (user) => {
     return axios.post(signInUrl, JSON.stringify(user), 
