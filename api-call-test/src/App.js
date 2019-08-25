@@ -78,7 +78,8 @@ componentDidMount = () => {
         <div className={classes.TopTab}>
           <TopTabComponent isLogin={isLogin} handleSignOut={this.handleSignOut}/>
         </div>
-        <div align="center">
+        {/* <div align="center"> */}
+        <div>
           <Route exact path="/" render = {() => <Home/>}/>
           <Route path="/tables" render = {() => <TableLayout isLogin={isLogin}/>}/>
           <Route path="/batchDetail/masterBatchId/:masterBatchId" render = {(props) => <BatchDetail isLogin={isLogin} masterBatchId={props.location.state.masterBatchId}/>}/>

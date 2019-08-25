@@ -38,7 +38,7 @@ const useStyles = theme => ({
     },
     table: {
         // width:'50%',
-        minWidth: 2500,
+        // minWidth: 2500,
     },
 });
 
@@ -89,20 +89,20 @@ class MaterialTableComponent extends React.Component {
                     tableData.map(data => (
                         <StyledTableRow hover onClick={event => this.handleClick(event, data)} key={data.batchFile.fileId}>
                             <StyledTableCell component="th" scope="row">{data.batchJobId.masterBatchId}</StyledTableCell>    
-                            <StyledTableCell align="right">{data.masterBatchName}</StyledTableCell>
-                            <StyledTableCell align="right">{data.hostname}</StyledTableCell>
-                            <StyledTableCell align="right">{data.inputFileYn}</StyledTableCell>
-                            <StyledTableCell align="right">{data.batchFile.fileId}</StyledTableCell>
-                            <StyledTableCell align="right">{data.batchFile.fileName}</StyledTableCell>
-                            <StyledTableCell align="right">{data.preBatchExistYn}</StyledTableCell>
-                            <StyledTableCell align="right">{data.fileAutoSendYn}</StyledTableCell>
-                            <StyledTableCell align="right">{data.multiProcessCount}</StyledTableCell>
-                            <StyledTableCell align="right">{data.reportType}</StyledTableCell>
-                            <StyledTableCell align="right">{data.applyYn}</StyledTableCell>
-                            <StyledTableCell align="right">{data.registerId}</StyledTableCell>
-                            <StyledTableCell align="right">{data.registerDate}</StyledTableCell>
-                            <StyledTableCell align="right">{data.updaterId}</StyledTableCell>
-                            <StyledTableCell align="right">{data.updateDate}</StyledTableCell>
+                            <StyledTableCell align="center">{data.masterBatchName}</StyledTableCell>
+                            <StyledTableCell align="center">{data.batchFile.fileId}</StyledTableCell>
+                            <StyledTableCell align="center">{data.batchFile.fileName}</StyledTableCell>
+                            <StyledTableCell align="center">{data.hostname}</StyledTableCell>
+                            <StyledTableCell align="center">{data.inputFileYn}</StyledTableCell>
+                            {/* <StyledTableCell align="center">{data.preBatchExistYn}</StyledTableCell>
+                            <StyledTableCell align="center">{data.fileAutoSendYn}</StyledTableCell>
+                            <StyledTableCell align="center">{data.multiProcessCount}</StyledTableCell>
+                            <StyledTableCell align="center">{data.reportType}</StyledTableCell> */}
+                            <StyledTableCell align="center">{data.applyYn}</StyledTableCell>
+                            {/* <StyledTableCell align="right">{data.registerId}</StyledTableCell> */}
+                            {/* <StyledTableCell align="right">{data.registerDate}</StyledTableCell> */}
+                            {/* <StyledTableCell align="right">{data.updaterId}</StyledTableCell> */}
+                            {/* <StyledTableCell align="right">{data.updateDate}</StyledTableCell> */}
                         </StyledTableRow>
                         // <TableRow hover key={data.batchProgramId.batchSeq}>
                         //     <TableCell component="th" scope="row">{data.batchProgramId.systemId}</TableCell>    
@@ -129,19 +129,19 @@ class MaterialTableComponent extends React.Component {
                             <TableRow>
                                 <StyledTableCell>배치프로그램시스템ID</StyledTableCell>
                                 <StyledTableCell align='center'>배치프로그램한글명</StyledTableCell>
-                                <StyledTableCell align='right'>호스트명</StyledTableCell>
-                                <StyledTableCell align='right'>파일유입여부</StyledTableCell>
-                                <StyledTableCell align='right'>배치파일ID</StyledTableCell>
-                                <StyledTableCell align='right'>배치파일명</StyledTableCell>
-                                <StyledTableCell align='right'>사전배치존재여부</StyledTableCell>
-                                <StyledTableCell align='right'>파일자동전송여부</StyledTableCell>
-                                <StyledTableCell align='right'>동시수행최대개수</StyledTableCell>
-                                <StyledTableCell align='right'>파일결과타입</StyledTableCell>
-                                <StyledTableCell align='right'>적용여부</StyledTableCell>
-                                <StyledTableCell align='right'>등록자ID</StyledTableCell>
-                                <StyledTableCell align='right'>등록일자</StyledTableCell>
-                                <StyledTableCell align='right'>변경자ID</StyledTableCell>
-                                <StyledTableCell align='right'>변경일자</StyledTableCell>
+                                <StyledTableCell align='center'>배치파일ID</StyledTableCell>
+                                <StyledTableCell align='center'>배치파일명</StyledTableCell>
+                                <StyledTableCell align='center'>호스트명</StyledTableCell>
+                                <StyledTableCell align='center'>파일유입여부</StyledTableCell>
+                                {/* <StyledTableCell align='center'>사전배치존재여부</StyledTableCell>
+                                <StyledTableCell align='center'>파일자동전송여부</StyledTableCell>
+                                <StyledTableCell align='center'>동시수행최대개수</StyledTableCell>
+                                <StyledTableCell align='center'>파일결과타입</StyledTableCell> */}
+                                <StyledTableCell align='center'>적용여부</StyledTableCell>
+                                {/* <StyledTableCell align='right'>등록자ID</StyledTableCell> */}
+                                {/* <StyledTableCell align='right'>등록일자</StyledTableCell> */}
+                                {/* <StyledTableCell align='right'>변경자ID</StyledTableCell> */}
+                                {/* <StyledTableCell align='right'>변경일자</StyledTableCell> */}
                                 {/* <TableCell>배치프로그램시스템ID</TableCell>
                                 <TableCell align='right'>배치순번</TableCell>
                                 <TableCell align='right'>배치프로세스ID</TableCell>

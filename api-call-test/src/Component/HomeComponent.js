@@ -9,12 +9,13 @@ import BoSchedulerImage from '../image/BoSchedulerImage.jpg'
 
 const useStyles = makeStyles(theme => ({
     firstContainer: {
-        flexGrow: 1,
+        // flexGrow: 1,
         // backgroundColor: '#00c9ff',
         backgroundColor: '#0079ff',
         // color: '#0002ff',
         // height: '700px',
-        paddingBottom: theme.spacing(20)
+        paddingBottom: theme.spacing(20),
+        textAlign: 'center'
         // padding: theme.spacing(10)
     },
     firstCommentHeader: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: '60px',
         fontFamily: 'Segoe UI',
         fontWeight: theme.typography.fontWeightBold,
-        marginTop: theme.spacing(15)
+        marginTop: theme.spacing(15),
         // padding: theme.spacing(3, 2)
     },
     firstComment: {
@@ -36,6 +37,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: 'white',
         // height: '1000px',
         width:'70%',
+        // textAlign: 'center'
         // paddingBottom: theme.spacing(10)
     },
     secondSubject: {
@@ -94,17 +96,17 @@ const HomeComponent = () => {
     const classes = useStyles();
     return (
         <div>
-            <Grid container className={classes.firstContainer} justify="center" sm={12}> 
+            <Grid container className={classes.firstContainer}> 
                 <Grid item >
                     <div className={classes.firstCommentHeader}><img src={HomeIcon} width="50" height="50" style={{marginBottom: '14px', marginRight: '-5px'}}/>atch Visualizer</div>
                     <div className={classes.firstComment}>Nxmile System의 배치프로그램 상세 정보 및<br/>실행 현황을 볼 수 있는 사이트입니다.</div>
                 </Grid>
             </Grid>
-            <Grid container className={classes.secondContainer} justify="center" sm={12}> 
-                <Grid item className={classes.secondSubject} sm={12}>
+            <Grid container className={classes.secondContainer}> 
+                <Grid item className={classes.secondSubject}>
                     다양한 기능
                 </Grid>
-                <Grid item className={classes.secondSubjectComment} sm={12}>
+                <Grid item className={classes.secondSubjectComment}>
                     Batch Visualizer의 다양한 기능을 업무에 활용하세요
                 </Grid>
                 <Grid item sm={12} md={6} >

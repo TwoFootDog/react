@@ -7,10 +7,16 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 const useStyles = theme => ({
-  TopComment: {
+  subject: {
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5),
-    fontSize: '40px'
+    padding: theme.spacing(0,10,0,10),
+    // textAlign: 'center',
+    fontSize: '30px',
+  },
+  table: {
+    padding: theme.spacing(0,10,0,10),
+    minWidth: 1100
   }
 })
 
@@ -67,11 +73,13 @@ class TableLayout extends React.Component {
   
     return(
       <div>
-        <div className={classes.TopComment}>배치프로그램 목록</div>
+        <div className={classes.subject}>배치프로그램 목록</div>
         {/* <TableSelectButtonComponent onClick={this.TableButtonClick}/> */}
         {/* {TableComponent()} */}
         {/* <TableComponent /> */}
+        <div  className={classes.table}>
         <MaterialTableComponent handleTableRowClick={this.handleTableRowClick}/>
+        </div>
         {/* <BootStrapTableComponent/> */}
       </div>
     );
