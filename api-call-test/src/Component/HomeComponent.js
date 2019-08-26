@@ -10,13 +10,12 @@ import BoSchedulerImage from '../image/BoSchedulerImage.jpg'
 const useStyles = makeStyles(theme => ({
     firstContainer: {
         // flexGrow: 1,
-        // backgroundColor: '#00c9ff',
         backgroundColor: '#0079ff',
         // color: '#0002ff',
         // height: '700px',
         paddingBottom: theme.spacing(20),
-        textAlign: 'center'
-        // padding: theme.spacing(10)
+        textAlign: 'center',
+        // paddingLeft: theme.spacing(100)
     },
     firstCommentHeader: {
         color: 'white',
@@ -24,35 +23,34 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Segoe UI',
         fontWeight: theme.typography.fontWeightBold,
         marginTop: theme.spacing(15),
-        // padding: theme.spacing(3, 2)
     },
     firstComment: {
         color: '#d2d2d2',
         fontSize: '25px',
-        marginTop: theme.spacing(10)
-        // padding: theme.spacing(3, 2)
+        marginTop: theme.spacing(10),
     },
     secondContainer: {
-        flexGrow: 1,
+        // flexGrow: 1,
         backgroundColor: 'white',
         // height: '1000px',
-        width:'70%',
+        // width:'70%',
+        textAlign: 'center',
         // textAlign: 'center'
         // paddingBottom: theme.spacing(10)
     },
     secondSubject: {
-        flexGrow: 1,
+        // flexGrow: 1,
         fontSize: '40px',
         fontWeight: theme.typography.fontWeightBold,
         marginTop: theme.spacing(10),
-        width:'70%',
+        // width:'70%',
     },
     secondSubjectComment: {
-        flexGrow: 1,
+        // flexGrow: 1,
         fontSize: '25px',
         // fontWeight: theme.typography.fontWeightBold,
         marginTop: theme.spacing(2),
-        width:'70%',
+        // width:'70%',
     },
     secondCommentHeader: {
         fontSize: '20px',
@@ -60,13 +58,13 @@ const useStyles = makeStyles(theme => ({
         paddingTop: theme.spacing(15),
     },
     secondComment: {
-        flexGrow: 1,
+        // flexGrow: 1,
         marginTop: theme.spacing(5),
         marginBottom: theme.spacing(5),
-        width:'80%',
+        // width:'50%',
     },
     thirdContainer: {
-        flexGrow: 1,
+        // flexGrow: 1,
         backgroundColor: '#323232',
         // height: '300px',
         // width: '80%',
@@ -84,7 +82,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2)
     },
     thirdComment: {
-        flexGrow: 1,
+        // flexGrow: 1,
         fontSize: '14px',
         color: 'white',
         // marginLeft: theme.spacing(-210)
@@ -97,29 +95,29 @@ const HomeComponent = () => {
     return (
         <div>
             <Grid container className={classes.firstContainer}> 
-                <Grid item >
+                <Grid item  xs={12}>
                     <div className={classes.firstCommentHeader}><img src={HomeIcon} width="50" height="50" style={{marginBottom: '14px', marginRight: '-5px'}}/>atch Visualizer</div>
                     <div className={classes.firstComment}>Nxmile System의 배치프로그램 상세 정보 및<br/>실행 현황을 볼 수 있는 사이트입니다.</div>
                 </Grid>
             </Grid>
             <Grid container className={classes.secondContainer}> 
-                <Grid item className={classes.secondSubject}>
+                <Grid item className={classes.secondSubject} xs={12}>
                     다양한 기능
                 </Grid>
-                <Grid item className={classes.secondSubjectComment}>
+                <Grid item className={classes.secondSubjectComment} xs={12}>
                     Batch Visualizer의 다양한 기능을 업무에 활용하세요
                 </Grid>
                 <Grid item sm={12} md={6} >
                     <Typography className={classes.secondCommentHeader}>TP배치스케쥴러</Typography>
                     <Typography component="p" className={classes.secondComment}>
-                        승인/회원 배치프로그램의 상세정보와 실행 이력 실시간 확인을 통해서 장애에 즉각적인 대처가 가능합니다
+                        승인/회원 배치프로그램의 상세정보와<br/>실행 이력 실시간 확인을 통해서 장애에<br/> 즉각적인 대처가 가능합니다
                     </Typography>
                     <img src={TpSchedulerImage} width="300px" height="300px"/>
                 </Grid>
-                <Grid item className={classes.secondContainer2} sm={12} md={6}>
+                <Grid item  sm={12} md={6}>
                     <Typography className={classes.secondCommentHeader}>정산배치스케쥴러</Typography>
                     <Typography component="p" className={classes.secondComment}>
-                        정산 배치프로그램의 실행 프로세스 및 현황을 다이어그램 형식으로 쉽고 빠르게 확인 할 수 있습니다
+                        정산 배치프로그램의 실행 프로세스 및<br/> 현황을 다이어그램 형식으로 쉽고 빠르게<br/> 확인 할 수 있습니다
                     </Typography>
                     <img src={BoSchedulerImage} width="300px" height="300px"/>
                 </Grid>

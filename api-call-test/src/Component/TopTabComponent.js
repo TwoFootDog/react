@@ -31,16 +31,17 @@ const useStyles = makeStyles(theme => ({
         // borderRadius: 3,
         // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
         color: 'white',
-        //height: 85,
+        height: 75,
         position: 'fixed',
-        top: 0
+        top: 0,
+        
         // padding: '0 px',
     },
     Tab: {
       textTransform: 'none', // 대문자로 자동변환 방지
       fontSize: '14px',
       fontWeight: theme.typography.fontWeightBold,
-      marginTop: theme.spacing(3)
+      // marginTop: theme.spacing(3)
     },
     HomeIcon: {
       fontSize: '60px',

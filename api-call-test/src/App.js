@@ -17,7 +17,7 @@ import BatchDetail from './Layout/BatchDetail';
 
 const useStyles = theme => ({
   TopTab: {
-    height: 74
+    height: 75
   }
 })
 
