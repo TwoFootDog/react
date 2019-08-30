@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
         // height: '1000px',
         // width:'70%',
         textAlign: 'center',
+        // padding: theme.spacing(0, 10, 0, 10)
         // textAlign: 'center'
         // paddingBottom: theme.spacing(10)
     },
